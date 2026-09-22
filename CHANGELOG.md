@@ -203,6 +203,18 @@ Initial release.
   spaCy's load failure with the `spacy download` command in the message, so
   that gap reports itself rather than surfacing as an E050 that reads like a
   typo in the model name.
+- **Released from CI by Trusted Publishing, never from a laptop.** A `v*` tag
+  runs `.github/workflows/release.yml`, which builds, clears the same gate an
+  ordinary push clears — it calls `ci.yml` rather than restating it, so a
+  release cannot pass a weaker check — and uploads with a short-lived OIDC
+  credential GitHub mints for that workflow in this repository. No API token
+  exists to leak or rotate, and each upload carries PEP 740 attestations.
+
+  Two guards run before the upload, both protecting something that cannot be
+  undone: the tag must match the built version, so a `v0.2.0` tag over a tree
+  still reading `0.1.0` fails rather than spending the wrong number; and
+  `twine check` runs first, because a `long_description` PyPI rejects is only
+  visible once that version is already gone.
 - `LICENSE` and `NOTICE` both ship in the wheel, as Apache-2.0 §4(d) requires;
   `py.typed` ships with them, so the annotations are visible to consumers.
 - The PHI gate's working-tree walk skips `dist/` and `build/` alongside `data/`
