@@ -1,0 +1,86 @@
+# LAN deployment: API replicas behind nothing, reading a shared read-only
+# dictionary volume. See docs/SERVICE.md for sizing and the measurements behind it.
+#
+#   UMLSMATCH_DICT_DIR=/srv/umlsmatch docker compose up -d --scale api=4
+
+services:
+  api:
+    build: .
+    image: umlsmatch:local
+
+    networks: [umlsmatch]
+
+    # Bind to the LAN interface you actually want. The default here is
+    # loopback-only so an unconfigured `docker compose up` cannot accidentally
+    # expose PHI to the whole network; set UMLSMATCH_BIND=0.0.0.0 deliberately.
+    ports: ["${UMLSMATCH_BIND:-127.0.0.1}:8000:8000"]
+
+    volumes:
+      # Read-only: the matcher opens SQLite with mode=ro and must never mutate
+      # the dictionary artifact. Enforcing it at the mount means a regression
+      # cannot corrupt a 600 MB build that takes ~40 minutes to regenerate.
+      - ${UMLSMATCH_DICT_DIR:-./data}:/data:ro
+
+    environment:
+      UMLSMATCH_DB: /data/umls_sno_rx.sqlite
+      # In-process concurrency. 2 is the useful default: the work is GIL-bound,
+      # so throughput flattens well before the pool does (docs/SERVICE.md).
+      UMLSMATCH_POOL_SIZE: ${UMLSMATCH_POOL_SIZE:-2}
+      UMLSMATCH_LEASE_TIMEOUT: ${UMLSMATCH_LEASE_TIMEOUT:-30}
+      UMLSMATCH_MAX_BATCH: ${UMLSMATCH_MAX_BATCH:-64}
+      # strict (default) reproduces the published figures; clinical_recall
+      # trades a literal reading for recall against adjudicated verdicts,
+      # mainly on history_of. /info reports which is live.
+      UMLSMATCH_PROFILE: ${UMLSMATCH_PROFILE:-strict}
+      # `false` keeps exception *messages* out of the log, which matters when
+      # logs leave the host: spaCy and sqlite3 may quote the input that broke
+      # them. Default `true` preserves full tracebacks -- and makes these logs
+      # PHI. See docs/SERVICE.md.
+      UMLSMATCH_LOG_EXCEPTION_DETAIL: ${UMLSMATCH_LOG_EXCEPTION_DETAIL:-true}
+
+    deploy:
+      resources:
+        limits:
+          # ~210 MB for the first pipeline, ~110 MB per additional one (each
+          # now loads its own spaCy model -- see docs/SERVICE.md), plus headroom
+          # for the SQLite page cache (~195 MB/connection ceiling) and the
+          # matcher's unevicted candidate memo. Raise if POOL_SIZE goes up.
+          memory: 1G
+
+    restart: unless-stopped
+
+    # Ride out the pool build before the orchestrator starts counting failures.
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://127.0.0.1:8000/ready"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 180s
+
+    # Note bodies are PHI and uvicorn's access log records paths, not bodies --
+    # but cap retention anyway so a long-running host does not accumulate an
+    # unbounded request record.
+    logging:
+      driver: json-file
+      options: { max-size: "10m", max-file: "3" }
+
+networks:
+  umlsmatch:
+    driver: bridge
+    # NOT `internal: true`. That removes the network's gateway, which also
+    # breaks published ports -- so a single published service cannot use it,
+    # and setting it here would look like egress protection while quietly
+    # disabling ingress instead.
+    #
+    # The service makes no outbound calls by design:
+    # the dictionary is a local file and the spaCy model is baked into the
+    # image at build time. Enforce that at the layer that can actually do it
+    # while still accepting traffic -- a host firewall rule on the container
+    # subnet, or a Kubernetes NetworkPolicy with an egress allow-list. Verify
+    # rather than assume:
+    #
+    #   docker compose exec api python -c \
+    #     "import socket; socket.create_connection(('1.1.1.1',53),timeout=3)"
+    #
+    # should fail once the policy is in place.
+

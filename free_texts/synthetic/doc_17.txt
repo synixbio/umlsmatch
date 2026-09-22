@@ -1,0 +1,35 @@
+RECORD 17 | TYPE: OUTPATIENT RHEUMATOLOGY CLINICAL NOTE
+
+PATIENT: Synthetic-017 | AGE: 38 | SEX: F | DATE: 2027-01-15
+REASON FOR VISIT: Evaluation of symmetric polyarthritis and morning stiffness.
+
+SUBJECTIVE:
+Patient presents with a 4-month history of worsening joint pain and swelling primarily affecting her bilateral hands, wrists, and feet. She describes profound stiffness in the mornings lasting at least 2 hours before gradual loosening with movement. Reports severe fatigue, difficulty opening jars, and typing at work. Denies dry eyes/mouth, malar rash, photosensitivity, Raynaud's phenomenon, or oral ulcers.
+
+PHYSICAL EXAMINATION:
+Musculoskeletal Examination:
+- Hands/Wrists: Bilateral wrist swelling and synovitis. Soft tissue swelling, tenderness, and boggy warmth noted at the 2nd and 3rd metacarpophalangeal (MCP) joints bilaterally and 3rd proximal interphalangeal (PIP) joints bilaterally. DIP joints spared. Grip strength diminished bilaterally.
+- Feet: Tenderness across bilateral metatarsophalangeal (MTP) joints on lateral squeeze test.
+- Knees/Elbows: Full range of motion, no effusion or warmth. No subcutaneous rheumatoid nodules.
+
+LABORATORY INVESTIGATIONS:
+- Rheumatoid Factor (RF): Elevated at 112 IU/mL (Reference: < 14).
+- Anti-Cyclic Citrullinated Peptide (Anti-CCP): Strongly positive at > 250 U/mL (Reference: < 20).
+- Erythrocyte Sedimentation Rate (ESR): 58 mm/hr.
+- C-Reactive Protein (CRP): 24.6 mg/L (elevated).
+- ANA: Negative (1:40 titer).
+- Hand and Wrist Radiographs: Periarticular osteopenia around MCP joints; no overt marginal bone erosions.
+
+ASSESSMENT:
+Seropositive Rheumatoid Arthritis (RA), high disease activity (CDAI = 28), early disease stage without radiographic erosions.
+
+TREATMENT PLAN:
+1. Disease-Modifying Antirheumatic Therapy (DMARD):
+   - Initiate oral Methotrexate 15 mg once weekly.
+   - Prescribe Folic Acid 1 mg PO daily to mitigate side effects.
+2. Bridging Anti-inflammatory Therapy:
+   - Prednisone 10 mg PO daily with plan to taper down and discontinue once Methotrexate reaches therapeutic efficacy in 6-8 weeks.
+3. Pre-treatment Screening:
+   - Ordered Quantiferon-TB Gold, Hepatitis B panel, and Hepatitis C antibody.
+4. Monitoring:
+   - Baseline CBC, LFTs, and creatinine obtained today. Follow up in 6 weeks for toxicity screen and response assessment.

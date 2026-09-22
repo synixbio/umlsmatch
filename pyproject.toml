@@ -1,0 +1,144 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "umlsmatch"
+# Read from `umlsmatch.__version__` rather than duplicated here. The service
+# reports that attribute on /health, /info and in the OpenAPI document, so two
+# literals would eventually disagree about which build is deployed.
+dynamic = ["version"]
+description = "Python-native clinical NLP pipeline for clinical concept extraction"
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [{ name = "synixbio", email = "synixbio@gmail.com" }]
+keywords = [
+    "umls",
+    "ctakes",
+    "clinical-nlp",
+    "concept-extraction",
+    "negation-detection",
+    "negex",
+    "named-entity-recognition",
+]
+# Apache-2.0 to match Apache cTAKES, from which the semantic-type tables, the
+# exclusion lists and the rare-word matching algorithm are derived. Section 4(d)
+# of that licence requires the upstream NOTICE to travel with the work, so both
+# files ship in the wheel rather than living only in the repository.
+license = "Apache-2.0"
+license-files = ["LICENSE", "NOTICE"]
+
+classifiers = [
+    # Beta, not Production/Stable: concept extraction is well validated, but the package
+    # has had no external users yet. Move to "5 - Production/Stable" with 1.0.0, not before.
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Healthcare Industry",
+    "Intended Audience :: Science/Research",
+    # The index, normalization and the POS models are English-scoped.
+    "Natural Language :: English",
+    "Operating System :: OS Independent",  # pure Python, no compiled extensions
+    # Must cover every version `requires-python` admits. The floor is 3.10 and
+    # the code stays inside it deliberately -- `matcher._V` is a `TypeVar`
+    # rather than PEP 695 `def _remember[V]`, which would have raised it to 3.12
+    # for a purely cosmetic gain.
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Scientific/Engineering :: Bio-Informatics",
+    "Topic :: Scientific/Engineering :: Information Analysis",
+    "Topic :: Scientific/Engineering :: Medical Science Apps.",
+    "Topic :: Text Processing :: Indexing",
+    "Topic :: Text Processing :: Linguistic",
+    "Typing :: Typed",
+]
+
+# Empty, and worth keeping that way. The core pipeline is standard library
+# only; spaCy, FastAPI and negspaCy are each an extra, so a batch/CLI user
+# installs no web stack and the negspaCy cross-check can never become a runtime
+# dependency of the rules it audits. The CLI is argparse for the same reason --
+# a dependency here is one every consumer pays for.
+dependencies = []
+
+[project.urls]
+# These are the only navigation a PyPI visitor gets. PyPI renders the README
+# standalone and does not rewrite relative links against anything, so the
+# README's own links are absolute for the same reason -- a relative
+# `docs/ADJUDICATION_RESULTS.md` resolves against pypi.org and 404s, and that
+# is the document the validation section tells people to read before quoting a
+# figure.
+Homepage = "https://github.com/synixbio/umlsmatch"
+Documentation = "https://github.com/synixbio/umlsmatch/blob/master/docs/USER_GUIDE.md"
+Changelog = "https://github.com/synixbio/umlsmatch/blob/master/CHANGELOG.md"
+Issues = "https://github.com/synixbio/umlsmatch/issues"
+
+[project.optional-dependencies]
+# ruff is configured below, so it belongs here -- otherwise `pip install -e
+# ".[dev]"` leaves `ruff check` unrunnable and the config silently unenforced.
+dev = ["pytest>=8.0", "ruff>=0.6", "httpx>=0.27"]
+# The `en_core_web_sm` POS model is NOT listed here, and cannot be: spaCy
+# models are not on PyPI, so naming one means a direct URL reference, and PyPI
+# rejects any distribution whose metadata contains one. It is a separate step:
+#
+#     python -m spacy download en_core_web_sm
+#
+# `pipeline/tokenizer.py` re-raises spaCy's load error with that command in the
+# message, so the missing step is self-describing rather than an opaque E050.
+nlp = ["spacy>=3.8,<4"]
+# Independent NegEx implementation, used only by tools/diff_negspacy.py to
+# cross-check the negation rules. Deliberately not in `dev`: nothing in the
+# shipping pipeline imports it, and it must never become a runtime dependency
+# of the thing it exists to audit.
+compare = ["negspacy>=1.1"]
+# The HTTP service. Separate from `nlp` because the deployment image needs both
+# while a batch/CLI user needs neither fastapi nor a port open.
+service = [
+    "fastapi>=0.110",
+    "uvicorn[standard]>=0.27",
+    "prometheus-client>=0.20",
+]
+
+[project.scripts]
+umlsmatch = "umlsmatch.__main__:main"
+
+[tool.hatch.version]
+path = "src/umlsmatch/__init__.py"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/umlsmatch"]
+
+[tool.pytest.ini_options]
+# "tools" is on the path so the build/convert scripts are importable under
+# test; they carry real logic (id sanitizing, RRF parsing) that was previously
+# only exercised by running them by hand.
+pythonpath = ["src", "tools"]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+src = ["src", "tests", "tools"]
+
+[tool.ruff.lint]
+# Pinned explicitly rather than left to ruff's defaults, which change between
+# releases: the `# noqa: E402` directives the tools/ scripts rely on were
+# silently dead (E402 is not in the current default set), so the sys.path-insert
+# -before-import pattern they document was going unchecked. An explicit list
+# means upgrading ruff cannot quietly turn a rule off -- or on, mid-review.
+select = [
+    "E",    # pycodestyle errors (incl. E402 module-import-not-at-top, E501 line length)
+    "W",    # pycodestyle warnings
+    "F",    # pyflakes
+    "I",    # import sorting
+    "UP",   # pyupgrade -- this package is >=3.10, so stdlib modernization applies
+    "B",    # bugbear
+    "SIM",  # simplification
+    "RUF",  # ruff-specific
+]
+
+[tool.ruff.lint.per-file-ignores]
+# Generated modules: long literal tables and generator-controlled `__all__`
+# ordering. Fixing either here is pointless -- the next run of
+# tools/transcode_semantic_tui.py or tools/extract_ctakes_tuis.py overwrites it.
+# Fix the generator instead.
+"src/umlsmatch/umls/semantic_tui.py" = ["E501", "RUF022"]
+"src/umlsmatch/umls/ctakes_tuis.py" = ["E501", "RUF022"]

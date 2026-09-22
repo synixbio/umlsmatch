@@ -1,0 +1,24 @@
+RECORD 12 | TYPE: GASTROENTEROLOGY ENDOSCOPY PROCEDURE NOTE
+
+PATIENT: Synthetic-012 | AGE: 52 | SEX: F | DATE: 2026-11-12
+PROCEDURE: Esophagogastroduodenoscopy (EGD) with biopsies.
+INDICATION: Persistent epigastric pain and dyspepsia refractory to 8 weeks of Omeprazole.
+ENDOSCOPIST: Dr. Sean Patel, MD | SEDATION: Monitored Anesthesia Care (Propofol).
+
+FINDINGS:
+1. Esophagus: Normal caliber and mucosa. Normal squamocolumnar junction located at 38 cm from incisors. No Barrett's epithelium or varices.
+2. Stomach: Moderate erythema and mucosal friability observed throughout the antrum. Multiple non-bleeding, superficial erosions measuring 2-4 mm identified in the prepyloric region. Cold forceps biopsies obtained for histopathology and rapid urease testing (CLOtest).
+3. Duodenum: Normal duodenal bulb and second portion of the duodenum; no ulcerations, celiac scalloping, or mass lesions.
+
+COMPLICATIONS: None. Blood loss negligible.
+RAPID UREASE TEST RESULT: Positive at 45 minutes (consistent with Helicobacter pylori).
+
+POST-PROCEDURE RECOMMENDATIONS:
+1. Patient was awakened and transferred to recovery in stable condition.
+2. Positive for Helicobacter pylori infection. Initiate quadruple eradication therapy:
+   - Bismuth subsalicylate 524 mg PO QID
+   - Metronidazole 500 mg PO TID
+   - Tetracycline 500 mg PO QID
+   - Pantoprazole 40 mg PO BID
+   Duration: 14 days.
+3. Order stool antigen test 6 weeks post-treatment completion to verify eradication (off PPI for >= 2 weeks prior to test).

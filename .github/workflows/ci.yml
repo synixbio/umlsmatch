@@ -1,0 +1,120 @@
+name: CI
+
+# The pre-commit hook runs these same checks, but only for people who ran
+# `git config core.hooksPath .githooks`, and `--no-verify` skips it. CI is what
+# makes the PHI gate non-optional.
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+
+jobs:
+  phi-guard:
+    # Runs alone and first: every other failure here is fixable in a follow-up
+    # commit, and note text reaching a remote is not.
+    name: PHI containment
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Refuse PHI-bearing paths anywhere in history
+        run: |
+          # The pattern is read from .githooks/phi-paths.pattern, the same file
+          # the pre-commit hook reads. It was previously written out here twice
+          # and once more in the hook; they drifted, and for a period this job
+          # passed `free_texts/synthetic/*.txt` (named `notes_txt/` at the
+          # time) -- the raw notes -- while the hook blocked them. Do not
+          # inline it again.
+          pat=$(grep -Ev '^[[:space:]]*(#|$)' .githooks/phi-paths.pattern | head -1)
+          if [ -z "$pat" ]; then
+            echo "::error::.githooks/phi-paths.pattern is missing or empty; the PHI gate is not running"
+            exit 1
+          fi
+          echo "pattern: $pat"
+
+          # The carve-out, from .githooks/phi-allow.pattern: paths the rule
+          # above matches that are known-safe, currently the synthetic corpus.
+          # Kept out of the pattern itself because POSIX ERE has no negative
+          # lookahead and `grep -P` is not portable enough to gate PHI on.
+          allow=$(grep -Ev '^[[:space:]]*(#|$)' .githooks/phi-allow.pattern 2>/dev/null \
+                  | head -1 || true)
+          echo "carve-out: ${allow:-<none>}"
+
+          # `grep -Eiv ""` matches every line and inverts to nothing, so an
+          # absent or empty allow file must mean "no exceptions", never "no
+          # filter". Both checks below run through this.
+          carve() {
+            if [ -n "$allow" ]; then grep -Eiv "$allow" || true; else cat; fi
+          }
+
+          # Tree check: what is in the repo right now.
+          tracked=$(git ls-files | grep -Ei "$pat" | carve || true)
+          if [ -n "$tracked" ]; then
+            echo "::error::PHI-bearing paths are tracked:"
+            printf '%s\n' "$tracked" | sed 's/^/    /'
+            exit 1
+          fi
+          # History check: catches a path added and later deleted, which the
+          # tree check above would miss entirely.
+          hist=$(git log --all --pretty=format: --name-only --diff-filter=A \
+                 | sort -u | grep -Ei "$pat" | carve || true)
+          if [ -n "$hist" ]; then
+            echo "::error::PHI-bearing paths appear in history (needs a rewrite, not a revert):"
+            printf '%s\n' "$hist" | sed 's/^/    /'
+            exit 1
+          fi
+          echo "clean: no PHI-bearing paths in tree or history"
+
+  test:
+    name: lint + tests (py${{ matrix.python-version }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        # Floor from pyproject's requires-python, plus current.
+        python-version: ["3.10", "3.13"]
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+
+      - name: Install
+        # `nlp` is included because several eval modules import the spaCy
+        # tokenizer at module scope -- without it those test files fail to
+        # import rather than skipping, which is a collection error, not a
+        # green build.
+        #
+        # The ~12 MB model is a second command, not part of the extra: spaCy
+        # models are not on PyPI, so depending on one means a direct URL
+        # reference and PyPI refuses to accept a distribution carrying one.
+        run: |
+          pip install -e ".[dev,nlp,service]"
+          python -m spacy download en_core_web_sm
+
+      - name: Lint
+        run: ruff check . --exclude .venv
+
+      - name: Tests
+        # Tests needing the UMLS dictionary skip themselves -- it is
+        # unlicensed and ~600 MB, so CI cannot have one. `-ra` prints the skip
+        # reasons, so a test skipping for the wrong reason is visible in the
+        # log instead of silent.
+        run: pytest -q -ra
+
+      - name: Guard against the suite silently emptying out
+        # Collection count, not pass count: it does not depend on whether a
+        # dictionary is present, so it isolates the failure this guards
+        # against -- an import or packaging break that makes whole test files
+        # vanish while the run still exits 0.
+        run: |
+          collected=$(pytest --collect-only -q 2>/dev/null | tail -1 | grep -oE '^[0-9]+' || echo 0)
+          echo "collected: $collected tests"
+          if [ "${collected:-0}" -lt 200 ]; then
+            echo "::error::only $collected tests collected; expected >=200 (import or packaging break?)"
+            exit 1
+          fi

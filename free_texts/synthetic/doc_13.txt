@@ -1,0 +1,21 @@
+RECORD 13 | TYPE: DERMATOLOGY CLINICAL VISIT
+
+PATIENT: Synthetic-013 | AGE: 44 | SEX: M | DATE: 2026-10-20
+REASON FOR VISIT: Evaluation of evolving pigmented skin lesion on upper back.
+
+HISTORY:
+Patient noticed a mole on his upper mid-back that has enlarged and darkened over the past 4 months. He notes occasional pruritus, but denies bleeding or ulceration. Extensive history of sunburns during childhood; no personal or family history of cutaneous melanoma.
+
+DERMATOLOGIC EXAMINATION:
+Full-body skin survey performed under bright examination lighting and polarized dermoscopy:
+- Upper thoracic back (midline): An asymmetric, irregularly pigmented macule measuring 8 mm x 6 mm. Border shows notched and scalloped margins. Colors range from light tan to dark brown with a focal eccentric area of blue-black pigmentation.
+- Dermoscopy: Asymmetric pigment network, atypical dots/globules at the periphery, and focal blue-white veil.
+- Remainder of skin exam reveals scattered benign-appearing seborrheic keratoses and compound nevi with uniform architecture. No palpable axillary, cervical, or supraclavicular lymphadenopathy.
+
+PROCEDURE PERFORMED:
+Excisional saucerization / deep punch biopsy of the 8 mm lesion on the mid-upper back using 1% Lidocaine with 1:100,000 Epinephrine. The entire lesion was removed with a 2-mm clinical margin to ensure accurate depth staging. Hemostasis attained with aluminum chloride and electrodessication. Specimen sent to dermatopathology in formalin labeled "mid-back pigmented lesion."
+
+ASSESSMENT & PLAN:
+1. Suspicious atypical melanocytic neoplasm, concerning for cutaneous melanoma.
+2. Biopsy performed; awaiting histopathological evaluation for Breslow depth, ulceration, and margin status.
+3. Wound care instructions provided. Return in 7-10 days for suture removal/wound check and pathology review.

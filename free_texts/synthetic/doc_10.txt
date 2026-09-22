@@ -1,0 +1,27 @@
+RECORD 10 | TYPE: PEDIATRIC EMERGENCY ENCOUNTER
+
+PATIENT: Synthetic-010 | AGE: 3 years | SEX: F | DATE: 2026-09-02 21:15
+CHIEF COMPLAINT: Barking cough and noisy breathing.
+
+HISTORY OF PRESENT ILLNESS:
+The patient is a previously healthy 3-year-old female brought in by her parents with sudden onset of a harsh, seal-like barking cough and stridor that began around 19:30 tonight. She had 2 days of clear rhinorrhea and low-grade fevers (38.0 C) managed with infant acetaminophen. Parents noted high-pitched whistling when she breathes in, worsened when she cries. No drooling, cyanosis, or foreign body aspiration history. Immunizations are up-to-date.
+
+PHYSICAL EXAMINATION:
+Vitals: Temp 38.2 C, HR 128 bpm, RR 32 bpm, SpO2 97% on room air.
+General: Awake, irritable, resting in mother's lap.
+HEENT: Pharynx mildly erythematous, no tonsillar exudates, uvula midline. No excessive drooling.
+Respiratory: Inspiratory stridor audible at rest when agitated, quiet when calm. Mild subcostal and intercostal retractions. Lungs clear to auscultation bilaterally without wheezing or crackles.
+Cardiovascular: Tachycardic, normal heart sounds, strong central pulses, capillary refill < 2 seconds.
+
+ASSESSMENT:
+Laryngotracheobronchitis (Croup), moderate severity (Westley Croup Score: 4).
+
+EMERGENCY DEPARTMENT COURSE & TREATMENT:
+1. Dexamethasone 0.6 mg/kg (9 mg) administered orally once.
+2. Nebulized racemic epinephrine (2.25% solution, 0.5 mL in 3 mL normal saline) delivered via blow-by oxygen mask.
+3. Re-evaluation at 60 minutes: Significant resolution of stridor at rest. Mild residual barking cough. No chest retractions. SpO2 99% on room air, RR 24 bpm.
+
+DISCHARGE PLAN:
+Patient observed for 3 hours post-epinephrine nebulization with no rebound stridor. Discharged home in stable condition.
+- Educated parents on humidity therapy (cool mist humidifier, steamy bathroom).
+- Prescribed strict return precautions for persistent resting stridor, retractions, lethargy, or cyanosis. Follow up with pediatrician in 48 hours.

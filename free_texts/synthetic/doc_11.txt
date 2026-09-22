@@ -1,0 +1,27 @@
+RECORD 11 | TYPE: INPATIENT DISCHARGE SUMMARY
+
+PATIENT: Synthetic-011 | AGE: 61 | SEX: M | ADMISSION: 2026-10-04 | DISCHARGE: 2026-10-09
+ADMISSION DIAGNOSIS: Acute decompensated heart failure with volume overload.
+DISCHARGE DIAGNOSES:
+1. Acute decompensated heart failure with reduced ejection fraction (HFrEF, LVEF 28%).
+2. Non-ischemic cardiomyopathy.
+3. Essential hypertension.
+4. Chronic kidney disease stage 3a (baseline Cr 1.3 mg/dL).
+
+HOSPITAL COURSE:
+A 61-year-old male with known HFrEF presented with progressive dyspnea, orthopnea (3 pillows), paroxysmal nocturnal dyspnea, and bilateral lower extremity edema up to the mid-shins, accompanied by a 14-pound weight gain over two weeks. Examination on admission demonstrated elevated JVP to 12 cm H2O, bibasilar lung crackles, and an S3 gallop.
+
+Patient was placed on telemetry and started on IV Furosemide 80 mg BID. Over 5 hospital days, he achieved a net negative fluid balance of 6.2 liters, returning to his dry weight of 88.5 kg. Dyspnea and orthopnea fully resolved. Inpatient echocardiogram showed severely decreased LV systolic function (LVEF 28%), similar to prior study 1 year ago. Baseline guideline-directed medical therapy (GDMT) was reviewed and optimized.
+
+DISCHARGE MEDICATIONS:
+1. Sacubitril-Valsartan 49/51 mg PO BID.
+2. Metoprolol Succinate 100 mg PO daily.
+3. Spironolactone 25 mg PO daily.
+4. Empagliflozin 10 mg PO daily.
+5. Furosemide 40 mg PO daily (adjusted maintenance dose).
+6. Potassium Chloride 20 mEq PO daily.
+
+DISCHARGE PLAN & EDUCATION:
+- Strict daily morning weights; call heart failure clinic if weight gains > 3 lbs in 24 hours or > 5 lbs in one week.
+- Sodium restriction < 2,000 mg/day; fluid restriction 2.0 L/day.
+- Outpatient appointment with Heart Failure Transition Clinic in 7 days, including BMP and renal panel.

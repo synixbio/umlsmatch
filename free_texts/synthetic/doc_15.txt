@@ -1,0 +1,30 @@
+RECORD 15 | TYPE: INPATIENT PROGRESS NOTE (NEPHROLOGY)
+
+PATIENT: Synthetic-015 | AGE: 67 | SEX: M | DATE: 2026-12-05
+HOSPITAL DAY: 3 | CONSULT DAY: 2
+REASON FOR FOLLOW-UP: Acute Kidney Injury on Chronic Kidney Disease Stage 3b.
+
+SUBJECTIVE:
+Patient states he feels less fatigued today. Urine output has increased noticeably following diuretic challenge. Denies nausea, shortness of breath, metallic taste, or pruritus.
+
+OBJECTIVE:
+Vitals: BP 136/82 mmHg, HR 76 bpm, RR 16 bpm, SpO2 98% room air.
+Ins and Outs: 24h intake 1800 mL, 24h urine output 2100 mL (positive response).
+Exam: No asterixis. Lungs clear bilaterally. Cardiovascular regular without friction rub. Trace pedal edema (decreased from 2+).
+
+LABORATORY TRENDS:
+- Serum Creatinine: 3.8 mg/dL (admission) -> 3.1 mg/dL (yesterday) -> 2.4 mg/dL (today). Baseline: 1.7 mg/dL.
+- BUN: 54 mg/dL -> 42 mg/dL -> 32 mg/dL.
+- Potassium: 4.4 mEq/L (stable).
+- Bicarbonate: 22 mEq/L.
+- Urinalysis: Specific gravity 1.014, granular muddy brown casts observed on urine microscopy, fractional excretion of sodium (FENa) 2.4% (consistent with acute tubular necrosis).
+
+IMPRESSION:
+Resolving acute tubular necrosis (ATN) secondary to IV iodinated contrast administered during coronary angiography combined with volume depletion. Demonstrating robust polyuric recovery phase.
+- Renal function improving steadily; no indications for emergent renal replacement therapy.
+
+PLAN:
+1. Continue renal protection: avoid nephrotoxic agents (NSAIDs, aminoglycosides, IV contrast).
+2. Maintain hydration: titrate IV fluids to match 75% of urine output plus insensible losses to avoid hypovolemia during polyuric phase.
+3. Hold ACE-inhibitors and SGLT2 inhibitors until serum creatinine returns to within 10% of baseline (1.7 mg/dL).
+4. Monitor daily basic metabolic panels and strict fluid balance.

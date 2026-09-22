@@ -1,0 +1,17 @@
+RECORD 19 | TYPE: NEUROSURGERY OPERATIVE NOTE
+
+PATIENT: Synthetic-019 | AGE: 48 | SEX: M | DATE: 2027-02-18
+PREOPERATIVE DIAGNOSIS: Lumbar radiculopathy with L4-L5 herniated nucleus pulposus refractory to conservative therapy.
+POSTOPERATIVE DIAGNOSIS: Lumbar radiculopathy with extruded L4-L5 disc fragment compressing right L5 nerve root.
+PROCEDURE PERFORMED: Right-sided microdiscectomy and laminotomy at L4-L5.
+SURGEON: Dr. Aris Thorne, MD | ANESTHESIA: General endotracheal.
+ESTIMATED BLOOD LOSS: 35 mL | HARDWARE: None.
+
+OPERATIVE DESCRIPTION:
+The patient was brought to the OR, intubated, placed in prone position on the Wilson frame with all pressure points padded, and fluoroscopy was used to identify the L4-L5 disc space. The lumbar region was prepped and draped.
+
+A 2.5-cm midline vertical incision was made centered over the L4-L5 interspace. The lumbar fascia was incised sharply on the right side. The paraspinal musculature was dissected subperiosteally off the spinous process and lamina and retracted laterally using a Caspar retractor. Intraoperative fluoroscopic localization re-confirmed the correct disc level.
+
+Under high-power operative microscope illumination, an inferior hemilaminotomy of L4 was performed using a high-speed matchstick drill and 2-mm Kerrison rongeurs. The flavum was carefully excised, exposing the thecal sac and the traversing right L5 nerve root. The nerve root was noted to be hyperemic and stretched tautly over a large, extruded disc fragment. The nerve root was gently mobilized and retracted medially with a love retractor.
+
+The posterior longitudinal ligament was incised, and an extruded, free disc fragment measuring approximately 1.5 cm was removed using pituitaries. Additional degenerated nuclear material was evacuated from within the disc space without entering the anterior annulus. The right L5 nerve root was thoroughly decompressed and demonstrated full mobility from its thecal origin out through the neural foramen. Hemostasis was verified with bipolar cautery and Surgicel. The wound was irrigated thoroughly, and layered closure was completed with 2-0 Vicryl for fascia, 3-0 Vicryl for subcutaneous tissue, and 4-0 Monocryl for skin. Sponge and needle counts were verified correct.

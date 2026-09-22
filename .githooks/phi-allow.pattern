@@ -1,0 +1,41 @@
+# The PHI carve-out, in one place.
+#
+# Read by .githooks/pre-commit and .github/workflows/ci.yml alongside
+# phi-paths.pattern, and by tests/test_phi_guard.py. A path is refused when it
+# matches phi-paths.pattern AND does not match this file. Nothing here widens
+# what the gate covers -- this file only takes paths back out of it.
+#
+# Format: as phi-paths.pattern. Comment and blank lines are ignored; the first
+# line that is neither is the pattern, as a POSIX extended regex matched
+# case-insensitively against repository-relative paths. Keep it to one line --
+# every consumer reads it with `head -1`.
+#
+# Why this file is more dangerous than phi-paths.pattern: that one fails closed
+# when it is wrong, and this one fails open. A pattern here that is too broad
+# does not announce itself; the gate simply stops refusing things. Two
+# consequences, both enforced by tests/test_phi_guard.py:
+#
+#   * every consumer skips the carve-out entirely when this file is missing or
+#     empty, rather than treating "no exceptions" as "no filter" -- an empty
+#     pattern handed to `grep -Eiv` matches every line and would invert into
+#     refusing nothing at all;
+#   * the pattern must not match any path in that module's MUST_BLOCK list, so
+#     widening it until it swallows the real corpus fails the suite.
+#
+# What it covers, and why it is safe:
+#
+#   ^free_texts/synthetic/[^/]+\.txt$
+#       The synthetic note corpus -- doc_01.txt .. doc_20.txt, generated, with
+#       no patient behind any of them. It is committed so the examples in
+#       examples/README.md and the corpus tests have something to run against
+#       on a fresh clone, which they could not when the only corpus was real
+#       notes and every path to it was refused.
+#
+#       Anchored and suffix-bound on purpose. `[^/]+` holds the exception to
+#       that one directory rather than any subtree created beneath it, and
+#       `\.txt$` holds it to the notes themselves: a .jsonl, .csv, .db or
+#       .parquet written into this directory is a derived artifact, and the
+#       pipeline that writes those is the same one that runs over the real
+#       corpus. Those stay refused, which is why this is a suffix allowance
+#       and not a directory one.
+^free_texts/synthetic/[^/]+\.txt$

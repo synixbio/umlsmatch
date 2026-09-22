@@ -1,0 +1,59 @@
+# The PHI path pattern, in one place.
+#
+# Read by .githooks/pre-commit (before a commit) and .github/workflows/ci.yml
+# (tree and history, on every push). It used to be written out in each of them
+# separately, and they drifted: the corpus moved from data/ to free_texts/ and
+# the hook was updated while CI was not, so for a period `free_texts/synthetic/
+# *.txt` (named `notes_txt/` at the time) -- the raw clinical notes -- passed
+# the check CI's own comment calls "what makes the PHI gate non-optional".
+# tests/test_phi_guard.py now fails if
+# any caller stops reading this file, or if this pattern stops matching the
+# corpus layout.
+#
+# Format: comment and blank lines are ignored; the first line that is neither
+# is the pattern, as a POSIX extended regex matched case-insensitively against
+# repository-relative paths. Keep it to one line -- every consumer reads it
+# with `grep -E`, and a multi-line pattern would silently use only the first.
+#
+# What each part covers, and why it fails closed:
+#
+#   ^(data|out|free_texts)/
+#       Every directory that has ever held the corpus or anything derived from
+#       it. `data/` holds only built dictionaries now and stays listed anyway:
+#       an ignore rule that has to be re-added later is one that will be
+#       missing when it matters.
+#
+#   \.(sqlite|jsonl|xmi|csv|tsv|txt|db|parquet)$
+#       Suffix cover for the same artifacts written somewhere new. A new output
+#       directory should fail closed rather than be discovered. `csv` is here
+#       because adjudication review files quote whole sentences of note text
+#       and a reviewer working in Excel saves them wherever is convenient;
+#       `txt` because the raw notes are .txt; `parquet` because
+#       examples/parse_to_parquet.py writes the same table the CSV export does,
+#       verbatim `text` column included, and a binary file gives a reviewer
+#       even less chance of noticing note text in it by eye.
+#
+#   (^|/)(design|_verdicts|_pairs|run_manifest)\.json$
+#       The adjudication sidecars, by name rather than by suffix. A blanket
+#       \.json$ would also block ordinary project files (.vscode/settings.json,
+#       a devcontainer), so the filenames that carry corpus offsets and
+#       verdicts are named instead. This is the one part that is narrow on
+#       purpose; widen it if a further sidecar appears.
+#
+#       `run_manifest` is that further sidecar: `python -m umlsmatch --out-dir`
+#       writes one per run, listing every source path it processed, and in this
+#       corpus those filenames are patient and note identifiers. The annotation
+#       files beside it are already covered by the .jsonl and .txt suffixes --
+#       the manifest was the only part of a run directory that would have
+#       passed. It is named `run_manifest` rather than `manifest` precisely so
+#       it can be listed here without catching unrelated files.
+#
+# Adding a pattern here needs no change to the hook or to CI. Adding one
+# anywhere else does, which is the point.
+#
+# Exceptions live in .githooks/phi-allow.pattern, not here: a path is refused
+# when it matches this file AND does not match that one. Keep it that way. The
+# two are not symmetric -- this file is safe to widen and dangerous to narrow,
+# that one is the reverse -- and folding them together would lose the property
+# that everything in this file is a refusal.
+^(data|out|free_texts)/|\.(sqlite|jsonl|xmi|csv|tsv|txt|db|parquet)$|(^|/)(design|_verdicts|_pairs|run_manifest)\.json$

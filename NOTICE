@@ -1,0 +1,112 @@
+umlsmatch
+Copyright 2026 The umlsmatch contributors
+
+Licensed under the Apache License, Version 2.0 (the "License"); see the
+LICENSE file in this distribution, or http://www.apache.org/licenses/LICENSE-2.0
+
+-------------------------------------------------------------------------------
+Apache cTAKES
+-------------------------------------------------------------------------------
+
+This product contains code derived from Apache cTAKES, which is licensed under
+the Apache License, Version 2.0. The notice below is reproduced from the cTAKES
+distribution as required by section 4(d) of that License.
+
+What is derived, and where:
+
+  * src/umlsmatch/umls/semantic_tui.py  -- transcribed from
+    ctakes-core .../core/util/annotation/SemanticTui.java
+  * src/umlsmatch/umls/ctakes_tuis.py   -- extracted from the cTAKES
+    dictionary configuration
+  * src/umlsmatch/dictionary/exclusions.py -- transcribed from
+    ctakes-dictionary-lookup-fast resources
+  * src/umlsmatch/dictionary/matcher.py -- a port of
+    DefaultJCasTermAnnotator.findTerms and the rare-word index scheme
+  * src/umlsmatch/pipeline/tokenizer.py -- reproduces cTAKES' whitespace and
+    sentence-segmentation behaviour
+
+  Apache cTAKES
+  Copyright 2013 The Apache Software Foundation
+
+  This product includes software developed at
+  The Apache Software Foundation (http://www.apache.org/).
+
+  Portions of cTAKES were originally developed by
+  Mayo Clinic and are licensed to the Apache Software
+  Foundation under the "Software Grant License Agreement".
+  Copyright (c) 2009 Mayo Foundation for Medical Education
+  and Research (MFMER)
+
+  Portions of cTAKES were originally developed by
+  Boston Children's Hospital and are licensed to the Apache Software
+  Foundation under the "Software Grant License Agreement".
+  Copyright (c) 2012 Boston Children's Hospital.
+
+  Portions of cTAKES were originally developed by
+  University of Colorado and are licensed to the Apache Software
+  Foundation under the "Software Grant License Agreement".
+  Copyright (c) 2012 University of Colorado.
+
+  Portions of cTAKES were originally developed by
+  The MITRE corporation  and are licensed to the Apache Software
+  Foundation under the "Software Grant License Agreement".
+  Copyright (c) 2012 The MITRE Corporation.
+
+-------------------------------------------------------------------------------
+MetaMapLite (U.S. National Library of Medicine)
+-------------------------------------------------------------------------------
+
+Courtesy of the U.S. National Library of Medicine.
+
+src/umlsmatch/assertion/negex_triggers.py contains the NegEx trigger lexicon
+transcribed from MetaMapLite's NegExKeyMap. MetaMapLite was developed and
+funded by the National Library of Medicine and is distributed under NLM's
+open-source BSD licence, which requires that redistributions of source code
+retain its Informational Notice. That notice is reproduced verbatim in the
+module's docstring, and applies to that file.
+
+Only the phrase lexicon is derived. MetaMapLite's matching algorithm is not
+reproduced: scope resolution in src/umlsmatch/assertion/negation.py is this
+project's own.
+
+umlsmatch was not developed, funded, endorsed or reviewed by the National
+Library of Medicine, the National Institutes of Health, or the U.S.
+Government. Neither their names nor those of MetaMapLite's developers are used
+to endorse or promote this software.
+
+-------------------------------------------------------------------------------
+UMLS Metathesaurus data -- licensed separately, NOT distributed here
+-------------------------------------------------------------------------------
+
+This software builds an index from the UMLS Metathesaurus. No UMLS content is
+included in this repository or in any distribution built from it: the
+dictionary artifact under data/ is generated locally and is gitignored.
+
+Use of UMLS data requires your own UMLS Metathesaurus License and an active
+UMLS Terminology Services (UTS) account from the U.S. National Library of
+Medicine. That licence obliges you to respect the copyrights of the constituent
+vocabularies and to file a brief annual report on your use. SNOMED CT carries
+additional affiliate licensing terms outside the United States.
+
+The Apache License above covers this software only. It does not grant any
+right to UMLS content.
+
+-------------------------------------------------------------------------------
+Negation and assertion rules
+-------------------------------------------------------------------------------
+
+The trigger, pseudo-trigger and terminator phrases used by
+src/umlsmatch/assertion/negation.py come from two sources, unioned there and
+kept separate in the source so neither is mistaken for the other:
+
+  * NegEx as MetaMapLite ships it -- see the MetaMapLite section above.
+  * 44 locally curated phrases NegEx does not carry, declared inline in
+    negation.py. These are this project's own work, informed by the published
+    NegEx and ConText literature (Chapman et al. 2001; Harkema et al. 2009),
+    not transcribed from any distribution.
+
+The section headers in src/umlsmatch/assertion/sections.py are entirely
+locally curated and are not derived from any third-party distribution.
+
+The module docstrings state this provenance. Keep them and this notice in
+agreement if the lexicons change.

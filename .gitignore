@@ -1,0 +1,88 @@
+# --- PHI: never commit -------------------------------------------------------
+# The corpus under free_texts/ is real clinical notes, and every artifact
+# derived from it carries either verbatim note text or note/patient identifiers
+# in filenames:
+#   free_texts/notes/*.csv              -- the notes themselves
+#   free_texts/json/silver.jsonl        -- Java cTAKES output, includes sofaString
+#   free_texts/xmi_out/*.xmi            -- derived, patient ids in the filenames
+#   out/*.jsonl, out/*.csv, out/*.db    -- matched spans quoted verbatim
+# free_texts/synthetic/*.txt is the one exception and is committed: those notes
+# are generated, with no patient behind any of them. The carve-out is at the
+# bottom of this block, and the commit gates read .githooks/phi-allow.pattern.
+# The suffix rules below are deliberate belt-and-braces: a new output directory
+# should fail closed, not leak. See the PHI notes in examples/02 and examples/07.
+#
+# This file stops an accident; it does not stop `git add -f`. The gates that do
+# are .githooks/pre-commit and .github/workflows/ci.yml, and both read their
+# pattern from .githooks/phi-paths.pattern, and their exceptions from
+# .githooks/phi-allow.pattern -- add a rule there as well as here, because the
+# two are matched differently and neither implies the other.
+#
+# `data/` holds only the built UMLS dictionaries now, but it stays listed: it is
+# where the corpus used to live, and an ignore rule that has to be re-added
+# later is one that will be missing when it matters.
+# Contents rather than the directory itself (`free_texts/`), because git does
+# not descend into an excluded directory and the synthetic carve-out at the
+# bottom of this block would therefore never be reachable.
+free_texts/*
+data/
+out/
+*.sqlite
+*.jsonl
+*.xmi
+# Adjudication review files quote whole sentences of note text.
+*.csv
+*.tsv
+# Same table as the CSV export, written by examples/parse_to_parquet.py.
+*.parquet
+# The raw notes are .txt and the adjudication design is .json. Neither suffix
+# was covered while the corpus sat under the blanket `data/` rule; both are
+# listed now so the belt-and-braces claim above is actually true.
+*.txt
+design.json
+# A --out-dir run manifest lists every source path it processed, and in this
+# corpus those filenames carry patient and note identifiers. Named rather than
+# covered by suffix for the same reason design.json is: a blanket *.json would
+# also ignore ordinary project files.
+run_manifest.json
+_run*.log
+
+# The synthetic corpus, committed. Both lines are needed and both must stay
+# last in this block: the first re-includes the directory so git will descend
+# into it at all, and the second has to out-rank the `*.txt` rule above, which
+# would otherwise re-ignore the notes. Only `.txt` is un-ignored -- a .jsonl or
+# .csv landing in this directory is a derived artifact from the same pipeline
+# that runs over the real corpus, and stays ignored.
+!free_texts/synthetic/
+!free_texts/synthetic/*.txt
+
+# --- Secrets: never commit ---------------------------------------------------
+# Same fail-closed reasoning as the PHI block above -- a credential in history
+# cannot be removed by a later commit. `git add -A` staged a .env holding
+# plaintext DB and Gitea passwords during the umlsmatch rename; it was caught
+# before the commit, but nothing in this file would have stopped it.
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# --- Build / tooling state ---------------------------------------------------
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+dist/
+build/
+*.egg-info/
+
+# --- Local editor and agent state --------------------------------------------
+.obsidian/
+.claude/
+
+# --- Local, unpublished notes ------------------------------------------------
+# A graded internal assessment. Kept out of the repository deliberately: it is
+# working material, not documentation, and nothing links to it. Ignored rather
+# than merely untracked so `git add -A` cannot republish it by accident.
+/docs/critique.md

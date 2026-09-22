@@ -1,0 +1,37 @@
+RECORD 20 | TYPE: PALLIATIVE CARE CONSULTATION NOTE
+
+PATIENT: Synthetic-020 | AGE: 71 | SEX: F | DATE: 2027-03-02
+CONSULTANT: Dr. Miriam Vance, MD
+REASON FOR CONSULTATION: Goals of care discussion and symptom management in refractory Stage IV pancreatic adenocarcinoma.
+
+HISTORY OF PRESENT ILLNESS:
+The patient is a 71-year-old female diagnosed with metastatic pancreatic adenocarcinoma (hepatic and peritoneal metastases) 8 months ago, currently refractory to second-line FOLFIRINOX chemotherapy. Admitted through the oncology clinic with progressive abdominal pain, early satiety, severe nausea, and a 20-pound weight loss over 6 weeks. Palliative care consult requested to assist with intractable visceral pain, nausea, and advance care planning.
+
+SYMPTOM ASSESSMENT (ESAS Score):
+- Pain: 8/10 (constant dull aching mid-epigastric pain with radiation to the mid-back).
+- Nausea: 7/10.
+- Appetite: 1/10.
+- Fatigue: 9/10.
+- Anxiety: 5/10.
+
+FAMILY & SOCIAL CONTEXT:
+Patient was accompanied by her husband of 48 years and her two adult daughters. The patient clearly articulates understanding that her malignancy is terminal. She states, "I do not want to suffer, and I don't want to spend my remaining time tied to hospital machines or suffering from nausea."
+
+PHYSICAL EXAMINATION:
+Vitals: BP 102/62 mmHg, HR 78 bpm, RR 16 bpm, SpO2 96% on room air.
+General: Frail, cachectic, comfortable at rest with bed elevated, clear sensorium.
+Abdomen: Scaphoid, soft, mild tenderness over epigastrium on palpation, no rebound, bowel sounds present but hypoactive. Palpable liver edge 3 cm below right costal margin.
+Extremities: Temporal and interosseous muscle wasting, no dependent edema.
+
+GOALS OF CARE DISCUSSION & RECOMMENDATIONS:
+1. Code Status / Advance Directives:
+   - Comprehensive discussion held regarding resuscitation preferences. In accordance with patient's explicit values and family consensus, code status was transitioned to Do Not Resuscitate / Do Not Intubate (DNR/DNI). POLST form completed and placed in the electronic health record.
+2. Pain Management:
+   - Initiate Hydromorphone PCA (Patient-Controlled Analgesia): Demand dose 0.2 mg IV, lockout interval 10 minutes, continuous basal infusion 0.2 mg/hr.
+   - Plan to calculate total daily requirement after 24 hours to transition to a transdermal Fentanyl patch (e.g., 25 mcg/hr) with oral breakthrough hydromorphone.
+3. Nausea & Appetite:
+   - Start Haloperidol 0.5-1 mg PO/IV TID PRN for visceral/central nausea.
+   - Add Dexamethasone 4 mg PO daily in the morning for appetite stimulation and antiemetic synergy.
+4. Transition Planning:
+   - Initiated referral for Inpatient / Home Hospice Care based on patient preference to return home surrounded by family once pain and nausea are stabilized.
+================================================================================

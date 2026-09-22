@@ -1,0 +1,25 @@
+RECORD 14 | TYPE: EMERGENCY DEPARTMENT NOTE
+
+PATIENT: Synthetic-014 | AGE: 22 | SEX: F | DATE: 2026-11-28 03:40
+CHIEF COMPLAINT: Acute right lower quadrant abdominal pain.
+
+HISTORY OF PRESENT ILLNESS:
+The patient is a 22-year-old female who presented to the emergency department at 02:30 with acute onset severe sharp pain in the right lower abdomen which began 4 hours prior while sleeping. Pain woke her from sleep and has steadily escalated (severity 9/10). Associated with two episodes of non-bloody, non-bilious emesis. Denies fever, diarrhea, dysuria, or hematuria. Last menstrual period started 18 days ago (regular 28-day cycle). Denies sexual activity for the past 6 months.
+
+PHYSICAL EXAMINATION:
+Vitals: BP 132/84 mmHg, HR 104 bpm, RR 20 bpm, Temp 37.1 C, SpO2 99% on ambient air.
+General: In severe distress, curled into fetal position on stretcher.
+Abdomen: Severe tenderness to palpation in the right lower quadrant and right iliac fossa with guarding and positive rebound tenderness. Rovsing sign negative. Pelvic exam reveals marked right adnexal tenderness; no cervical motion tenderness.
+
+DIAGNOSTIC WORKUP:
+- Serum beta-hCG: Negative (< 1 mIU/mL).
+- Urinalysis: Clear, trace ketones, negative nitrites/leukocyte esterase.
+- Pelvic Ultrasound with Doppler: Normal-appearing uterus. Left ovary measures 3.1 x 2.2 cm with normal vascular flow. Right ovary is enlarged measuring 6.2 x 5.1 x 4.8 cm with multiple small peripheral follicles, surrounding edema, and absent arterial and venous blood flow on color Doppler, consistent with right ovarian torsion. Trace free fluid in the pouch of Douglas.
+
+ASSESSMENT AND MANAGEMENT:
+Right ovarian torsion. Surgical emergency.
+1. Immediate gynecology consult obtained; Dr. Ramos evaluated the patient bedside.
+2. Kept NPO for emergent diagnostic laparoscopy and right ovarian detorsion.
+3. IV access established; 1 liter normal saline bolus infusing.
+4. Analgesia: IV Hydromorphone 0.5 mg administered with moderate pain reduction.
+5. Preoperative labs sent (CBC, type and screen, coagulation panel). Consented and transported to OR.

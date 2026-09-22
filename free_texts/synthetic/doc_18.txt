@@ -1,0 +1,31 @@
+RECORD 18 | TYPE: TELEMEDICINE OUTPATIENT ENCOUNTER
+
+PATIENT: Synthetic-018 | AGE: 35 | SEX: M | DATE: 2027-02-04
+VISIT MODALITY: Secure Synchronous Video Encounter.
+REASON FOR ENCOUNTER: Acute sinusitis symptoms and facial pressure.
+
+HISTORY OF PRESENT ILLNESS:
+The patient is a 35-year-old male who presents via telehealth complaining of nasal congestion, discolored nasal discharge, and facial pressure. The illness began 11 days ago as a mild cold with clear rhinorrhea and sore throat. Around day 7, symptoms began improving, but on day 9 he experienced acute worsening with severe right maxillary facial pain, toothache-like discomfort, purulent green-yellow nasal drainage, and low-grade fevers to 37.8 C ("double sickening"). Denies periorbital swelling, vision changes, photophobia, or neck stiffness.
+
+PAST MEDICAL HISTORY:
+- Seasonal allergic rhinitis.
+- No drug allergies (NKDA).
+
+VIRTUAL PHYSICAL EXAMINATION:
+- General: Alert, oriented x 4, speaking comfortably without respiratory distress.
+- Eyes: Normal external appearance via video, no periorbital edema, no proptosis, extraocular movements intact.
+- Nose: Purulent anterior rhinorrhea visible at nares. Patient palpates bilateral maxillary and frontal sinuses under observation, eliciting prominent tenderness over the right maxillary antrum.
+- Oropharynx: Posterior pharyngeal erythema and purulent post-nasal drip visualized with smartphone illumination.
+
+ASSESSMENT:
+Acute Bacterial Rhinosinusitis (ABRS), characterized by biphasic illness pattern ("double sickening") exceeding 10 days of duration.
+
+MANAGEMENT PLAN:
+1. Antibiotic Therapy:
+   - Amoxicillin-Clavulanate 875/125 mg PO BID for 7 days.
+2. Supportive & Symptomatic Measures:
+   - High-volume isotonic saline nasal rinses (sinus rinse bottle) BID.
+   - Fluticasone propionate nasal spray 2 sprays per nostril once daily.
+   - Oral hydration, humidified air, and Acetaminophen 650 mg PRN sinus discomfort.
+3. Red Flag Warnings:
+   - Advised immediate evaluation at emergency department for high fevers (>39 C), periorbital swelling/erythema, double vision, or severe persistent headache.
