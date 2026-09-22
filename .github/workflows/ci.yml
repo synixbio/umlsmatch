@@ -7,6 +7,12 @@ on:
   push:
     branches: ["**"]
   pull_request:
+  # release.yml calls this workflow rather than restating the checks. A release
+  # must not be able to pass a weaker gate than an ordinary push, and a second
+  # copy of the matrix and the PHI job is exactly the drift .githooks/
+  # phi-paths.pattern exists to prevent -- the pattern was inlined in three
+  # places once and they disagreed for a period.
+  workflow_call:
 
 jobs:
   phi-guard:

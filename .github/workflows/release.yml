@@ -1,0 +1,92 @@
+name: Release
+
+# Publishes to PyPI via Trusted Publishing (OpenID Connect): GitHub mints a
+# short-lived token for this specific workflow in this specific repository and
+# PyPI exchanges it for an upload. There is no API token in the repository
+# secrets, so there is nothing to leak, rotate, or accidentally grant to a
+# third-party action.
+#
+# Setup this depends on, done once in a browser and not expressible here:
+#
+#   1. PyPI -> Your projects -> umlsmatch -> Publishing (or, before the first
+#      upload, Account settings -> Publishing -> Add a pending publisher):
+#        owner: synixbio    repository: umlsmatch
+#        workflow: release.yml    environment: pypi
+#   2. GitHub -> Settings -> Environments -> New environment named `pypi`.
+#      Worth adding a required reviewer there: it makes an upload a decision
+#      rather than a side effect of pushing a tag, and a PyPI version number
+#      can never be reused once burned.
+#
+# The four values in step 1 are matched exactly by PyPI on every upload. A
+# renamed workflow file, a renamed repository, or a different environment name
+# is a rejected publish, not a silent fallback.
+
+on:
+  push:
+    tags: ["v*"]
+  # The first release is the awkward one: v0.1.0 was tagged and pushed before
+  # this workflow existed, so no tag push will ever fire for it. Dispatch it by
+  # hand once, then tags drive everything after.
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  # A release must clear the same gate as an ordinary push -- the real PHI
+  # containment job and the real test matrix, not a reduced copy of them.
+  test:
+    # A called workflow inherits the calling job's permissions, and the
+    # file-level default here is nothing -- so checkout needs this granted
+    # explicitly or the PHI job cannot clone the history it exists to scan.
+    permissions:
+      contents: read
+    uses: ./.github/workflows/ci.yml
+
+  publish:
+    needs: test
+    runs-on: ubuntu-latest
+    environment: pypi
+    permissions:
+      contents: read
+      # The OIDC token PyPI verifies. Granted to this job alone: `permissions: {}`
+      # at the top of the file means nothing else here can mint one.
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Build
+        run: |
+          python -m pip install --upgrade pip build twine
+          python -m build
+
+      - name: Refuse a build whose version disagrees with the tag
+        # Without this, `git tag v0.2.0` on a tree that still says 0.1.0
+        # publishes 0.1.0 -- or fails as a duplicate, long after the tag
+        # suggested otherwise. Skipped on workflow_dispatch, where there is no
+        # tag to compare against.
+        if: startsWith(github.ref, 'refs/tags/')
+        run: |
+          tag="${GITHUB_REF_NAME#v}"
+          built=$(ls dist/*.whl | sed -E 's/.*umlsmatch-([^-]+)-.*/\1/')
+          echo "tag=$tag built=$built"
+          if [ "$tag" != "$built" ]; then
+            echo "::error::tag $GITHUB_REF_NAME does not match built version $built"
+            echo "::error::[tool.hatch.version] reads src/umlsmatch/__init__.py -- bump it there"
+            exit 1
+          fi
+
+      - name: Check metadata renders on PyPI
+        # `twine check` catches a long_description PyPI would reject or render
+        # as plain text. Cheap, and the failure it prevents is only visible
+        # after the version number is already spent.
+        run: python -m twine check dist/*
+
+      - name: Publish
+        # No `password:` -- the action detects the OIDC credential and exchanges
+        # it. It also attaches PEP 740 attestations by default, which is the
+        # reason to prefer this action over a raw `twine upload`.
+        uses: pypa/gh-action-pypi-publish@release/v1
