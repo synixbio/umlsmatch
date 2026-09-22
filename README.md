@@ -347,6 +347,7 @@ calls.
 | [docs/SERVICE.md](https://github.com/synixbio/umlsmatch/blob/master/docs/SERVICE.md) | HTTP service and deployment |
 | [docs/ADJUDICATION_RESULTS.md](https://github.com/synixbio/umlsmatch/blob/master/docs/ADJUDICATION_RESULTS.md) | the assertion attributes scored against verdicts instead of cTAKES |
 | [docs/UMLS_UPDATE_GUIDE.md](https://github.com/synixbio/umlsmatch/blob/master/docs/UMLS_UPDATE_GUIDE.md) | rebuilding against a newer UMLS release |
+| [docs/RELEASING.md](https://github.com/synixbio/umlsmatch/blob/master/docs/RELEASING.md) | cutting a release, and what to do when one goes wrong |
 | [CONTRIBUTING.md](https://github.com/synixbio/umlsmatch/blob/master/CONTRIBUTING.md) | setup, PHI rules, conventions |
 
 ## Licence

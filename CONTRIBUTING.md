@@ -90,6 +90,15 @@ satisfying the linter.
 Tests that need the built dictionary or the spaCy model skip themselves when
 those are absent, so a fresh clone runs green without a 589 MB download.
 
+## Releasing
+
+Don't `twine upload`. Releases come from CI: bump `__version__` in
+`src/umlsmatch/__init__.py`, commit, `git tag v0.1.1 && git push origin v0.1.1`.
+The tag runs the test matrix and the PHI gate, then publishes with a
+short-lived OIDC credential — there is no PyPI token in this repository, and
+uploading by hand bypasses every check. Full procedure, including what to do
+when a release fails or ships broken, is in [docs/RELEASING.md](docs/RELEASING.md).
+
 ## Generated files
 
 `src/umlsmatch/umls/semantic_tui.py` and `src/umlsmatch/umls/ctakes_tuis.py` are
