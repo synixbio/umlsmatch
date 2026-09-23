@@ -4,6 +4,19 @@ Notable changes to umlsmatch. Format follows [Keep a
 Changelog](https://keepachangelog.com/en/1.1.0/); versions follow [semantic
 versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Added
+
+- **`ClinicalPipeline.assess(text, spans)`** runs this pipeline's sentence
+  splitting, parse, section tracking and assertion rules over concept spans
+  found by another extractor, given as `(start, end, cui)`. It returns one
+  `Annotation` per span in input order, or `None` for a span that crosses a
+  sentence boundary or covers no token. `analyze()` and `assess()` now share one
+  private method, `_assess_window`, so a span both see gets the same attributes
+  from either; a test pins that. For pairing these rules with MetaMapLite's
+  concepts (cuiflow's `ensemble:hybrid_staged`).
+
 ## [0.1.0] — 2026-09-22
 
 Initial release.

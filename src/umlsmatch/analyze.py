@@ -47,6 +47,7 @@ docs/ADJUDICATION_RESULTS.md.
 
 from __future__ import annotations
 
+import bisect
 import json
 import os
 from collections.abc import Iterable, Iterator, Sequence
@@ -510,7 +511,6 @@ class ClinicalPipeline:
             # switch disables the section *rules* without changing what gets
             # extracted.
             section = header if self.sections else None
-            in_negative_section = section in NEGATIVE_FINDINGS_SECTIONS
 
             matches: Sequence[Match] = self.matcher.match(tokens)
             if self.drop_header_mentions:
@@ -527,54 +527,146 @@ class ClinicalPipeline:
                 continue
             if self.resolve_overlaps:
                 matches = longest_non_overlapping(matches)
-            negated = negated_matches(
-                tokens,
-                matches,
-                # Inside a negative-findings section the cap is the wrong
-                # instrument -- see umlsmatch.assertion.sections.
-                max_scope=None if in_negative_section else self.max_scope,
-                coordination=self.coordination,
-                clause_bounding=self.clause_bounding,
-            )
-            family = (
-                family_member_matches(tokens, matches, section=section)
-                if self.subject
-                else frozenset()
-            )
-            past = (
-                history_matches(
-                    tokens,
-                    matches,
-                    section=section,
-                    history_sections=self._history_sections,
-                )
-                if self.history
-                else frozenset()
-            )
-            hedged = (
-                uncertain_matches(tokens, matches) if self.uncertainty else frozenset()
-            )
-            hypothetical = (
-                conditional_matches(tokens, matches)
-                if self.conditional
-                else frozenset()
-            )
+            attributes = self._assess_window(tokens, matches, section)
             for m in matches:
                 if self.groups is not None and m.group not in self.groups:
                     continue
-                out.append(
-                    self._to_annotation(
-                        m,
-                        text,
-                        negated=m in negated,
-                        subject=self._subject(m in family),
-                        history_of=(m in past) if self.history else None,
-                        uncertain=(m in hedged) if self.uncertainty else None,
-                        conditional=(m in hypothetical) if self.conditional else None,
-                    )
-                )
+                out.append(self._to_annotation(m, text, **attributes[m]))
 
         out.sort(key=lambda a: (a.start, a.end, a.cui))
+        return out
+
+    def _assess_window(
+        self, tokens: Sequence, matches: Sequence[Match], section: str | None
+    ) -> dict[Match, dict]:
+        """Every assertion attribute for `matches` in one sentence window.
+
+        The single place the rules run, shared by :meth:`analyze` and
+        :meth:`assess` so the two cannot drift: a span both of them see gets
+        the same attributes from either. Values follow the "not assessed is
+        ``None``" contract, keyed by :meth:`_to_annotation`'s argument names.
+        """
+        in_negative_section = section in NEGATIVE_FINDINGS_SECTIONS
+        negated = negated_matches(
+            tokens,
+            matches,
+            # Inside a negative-findings section the cap is the wrong
+            # instrument -- see umlsmatch.assertion.sections.
+            max_scope=None if in_negative_section else self.max_scope,
+            coordination=self.coordination,
+            clause_bounding=self.clause_bounding,
+        )
+        family = (
+            family_member_matches(tokens, matches, section=section)
+            if self.subject
+            else frozenset()
+        )
+        past = (
+            history_matches(
+                tokens,
+                matches,
+                section=section,
+                history_sections=self._history_sections,
+            )
+            if self.history
+            else frozenset()
+        )
+        hedged = uncertain_matches(tokens, matches) if self.uncertainty else frozenset()
+        hypothetical = (
+            conditional_matches(tokens, matches) if self.conditional else frozenset()
+        )
+        return {
+            m: {
+                "negated": m in negated,
+                "subject": self._subject(m in family),
+                "history_of": (m in past) if self.history else None,
+                "uncertain": (m in hedged) if self.uncertainty else None,
+                "conditional": (m in hypothetical) if self.conditional else None,
+            }
+            for m in matches
+        }
+
+    def assess(
+        self, text: str, spans: Iterable[tuple[int, int, str]]
+    ) -> list[Annotation | None]:
+        """Assess concept spans found by *another* extractor.
+
+        Runs this pipeline's sentence splitting, parse, section tracking and
+        assertion rules -- the same ones :meth:`analyze` uses, through
+        :meth:`_assess_window` -- over caller-supplied ``(start, end, cui)``
+        spans instead of this pipeline's own matches. It exists so a different
+        concept extractor (MetaMapLite, say) can be paired with these
+        assertion rules without reaching into private modules.
+
+        Returns one entry per span, in input order: an :class:`Annotation`, or
+        ``None`` when the span cannot be assessed -- it crosses a sentence
+        boundary or covers no token. ``None`` rather than a guess, for the same
+        reason unassessed attributes are ``None``.
+
+        Extraction switches do not apply: ``groups``, ``drop_header_mentions``
+        and ``resolve_overlaps`` decide what :meth:`analyze` *finds*, and here
+        the caller has already decided that. A span that starts or ends
+        mid-token is widened to whole tokens for scope decisions; the returned
+        annotation keeps the caller's offsets. ``term`` is empty (no dictionary
+        string matched), and ``group`` and ``preferred_text`` come from this
+        pipeline's dictionary, empty for a CUI it does not contain.
+
+        Raises:
+            ValueError: a span is outside `text` or empty, or `text` is longer
+                than :attr:`max_chars`.
+        """
+        spans = list(spans)
+        for start, end, _cui in spans:
+            if not 0 <= start < end <= len(text):
+                raise ValueError(f"span ({start}, {end}) is empty or outside the text")
+        out: list[Annotation | None] = [None] * len(spans)
+        if not spans or not text.strip():
+            return out
+        self._check_length(text)
+
+        pending = dict(enumerate(spans))
+        windows = self._annotate_sentences(text, model=self._model)
+        for tokens, header in track_sections(windows):
+            if not pending:
+                break
+            if not tokens:
+                continue
+            section = header if self.sections else None
+            w_start, w_end = tokens[0].start, tokens[-1].end
+            starts = [t.start for t in tokens]
+            ends = [t.end for t in tokens]
+            owners: list[int] = []
+            matches: list[Match] = []
+            for i, (start, end, cui) in list(pending.items()):
+                if start >= w_end:
+                    continue  # belongs to a later window
+                del pending[i]  # decided here, one way or the other
+                # Anything but whitespace outside this window means the span
+                # crosses a sentence boundary (or sits between windows).
+                if text[start:w_start].strip() or text[w_end:end].strip():
+                    continue
+                first = bisect.bisect_right(ends, start)
+                last = bisect.bisect_left(starts, end)
+                if first >= last:
+                    continue
+                owners.append(i)
+                matches.append(
+                    Match(
+                        cui=cui,
+                        term="",
+                        text=text[start:end],
+                        start=start,
+                        end=end,
+                        token_start=first,
+                        token_end=last,
+                        group=self.matcher._group(cui),
+                    )
+                )
+            if not matches:
+                continue
+            attributes = self._assess_window(tokens, matches, section)
+            for i, m in zip(owners, matches, strict=True):
+                out[i] = self._to_annotation(m, text, **attributes[m])
         return out
 
     def _check_length(self, text: str) -> None:
