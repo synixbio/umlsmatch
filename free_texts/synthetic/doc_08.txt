@@ -1,0 +1,30 @@
+RECORD 08 | TYPE: OUTPATIENT ONCOLOGY PROGRESS NOTE
+
+PATIENT: Synthetic-008 | AGE: 54 | SEX: F | DATE: 2026-07-19
+DIAGNOSIS: Stage IIA Invasive Ductal Carcinoma of the Left Breast, ER-positive, PR-positive, HER2-negative.
+
+HISTORY OF PRESENT ILLNESS:
+Patient presents for cycle 3 of adjuvant chemotherapy (Docetaxel and Cyclophosphamide - TC regimen). She completed Cycle 2 twenty-one days ago. Reports mild to moderate fatigue (grade 1) and transient grade 1 nausea managed with Ondansetron. Experienced mild taste alterations and complete alopecia. Denies fevers, chills, shortness of breath, chest pain, mouth sores, or numbness/tingling in fingers and toes.
+
+PHYSICAL EXAMINATION:
+ECOG Performance Status: 0.
+Vitals: BP 118/74 mmHg, HR 74 bpm, Temp 36.6 C, Wt 64.2 kg.
+HEENT: Alopecia noted. Oral mucosa pink, moist, without mucositis or ulcerations.
+Lymph Nodes: No palpable cervical, supraclavicular, or axillary lymphadenopathy.
+Chest: Well-healed left partial mastectomy scar; no erythema, edema, or local recurrence.
+Cardiopulmonary: S1/S2 present, lungs clear bilaterally.
+Extremities: No peripheral edema.
+
+LABORATORY VALUES:
+- WBC: 5.4 x 10^3/uL
+- Absolute Neutrophil Count (ANC): 3.2 x 10^3/uL (adequate for chemotherapy)
+- Hemoglobin: 11.2 g/dL | Platelets: 215 x 10^3/uL
+- Total Bilirubin: 0.6 mg/dL | AST: 22 U/L | ALT: 26 U/L | Creatinine: 0.74 mg/dL
+
+PLAN:
+1. Proceed with Cycle 3 TC today:
+   - Docetaxel 75 mg/m^2 IV
+   - Cyclophosphamide 600 mg/m^2 IV
+   - Premedications: Dexamethasone 8 mg PO BID starting 24 hours prior; IV Ondansetron 16 mg and Fosaprepitant 150 mg IV prior to infusion.
+2. Continue pegfilgrastim on-body injector 24 hours post-chemo for primary prophylaxis against febrile neutropenia.
+3. Complete final cycle (Cycle 4) in 3 weeks, followed by radiation oncology consultation for adjuvant whole-breast radiotherapy.

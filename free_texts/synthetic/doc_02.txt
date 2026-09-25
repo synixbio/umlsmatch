@@ -1,0 +1,25 @@
+RECORD 02 | TYPE: INPATIENT DISCHARGE SUMMARY
+
+PATIENT: Synthetic-002 | AGE: 72 | SEX: F | ADMISSION: 2026-02-18 | DISCHARGE: 2026-02-23
+ADMISSION DIAGNOSIS: Community-acquired pneumonia with acute hypoxemic respiratory failure.
+DISCHARGE DIAGNOSES:
+1. Resolving right lower lobe Streptococcus pneumoniae pneumonia.
+2. Acute hypoxemic respiratory failure, resolved.
+3. Acute kidney injury (prerenal azotemia), resolved.
+4. Type 2 diabetes mellitus, controlled.
+
+HOSPITAL COURSE SUMMARY:
+A 72-year-old female presented with 4 days of productive cough with rust-colored sputum, subjective fevers, and increasing dyspnea. Initial room air oxygen saturation was 87%, improving to 94% on 3L nasal cannula. Chest radiography confirmed right lower lobe consolidation. Sputum Gram stain and culture yielded Streptococcus pneumoniae sensitive to ceftriaxone. Initial creatinine was elevated at 1.8 mg/dL (baseline 0.9 mg/dL) secondary to poor oral intake and dehydration.
+
+The patient was initiated on IV Ceftriaxone 1g daily and IV Azithromycin 500mg daily, alongside gentle isotonic fluid rehydration. Oxygen was weaned off by Hospital Day 3. Renal function normalized with Cr 0.88 mg/dL by Day 4. The patient transitioned to oral Cefpodoxime 200 mg BID to complete a 7-day total antimicrobial course. At discharge, the patient is afebrile, ambulatory on room air, and tolerating oral nutrition.
+
+DISCHARGE MEDICATIONS:
+1. Cefpodoxime proxetil 200 mg PO BID (complete 2 remaining days).
+2. Metformin 500 mg PO BID.
+3. Lisinopril 10 mg PO daily (restarted upon discharge following creatinine normalization).
+4. Albuterol HFA inhaler 90 mcg 2 puffs PRN wheezing.
+
+DISCHARGE INSTRUCTIONS & FOLLOW-UP:
+- Follow up with primary care physician Dr. Aris Thorne in 7 to 10 days.
+- Repeat chest radiograph in 6 weeks to ensure complete radiographic clearance.
+- Return to ED immediately for recurrent fevers, worsening shortness of breath, or hemoptysis.

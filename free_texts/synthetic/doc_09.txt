@@ -1,0 +1,31 @@
+RECORD 09 | TYPE: PSYCHIATRY OUTPATIENT INTAKE EVALUATION
+
+PATIENT: Synthetic-009 | AGE: 29 | SEX: M | DATE: 2026-08-11
+REASON FOR REFERRAL: Worsening depressive symptoms and generalized anxiety.
+
+HISTORY OF PRESENT ILLNESS:
+The patient is a 29-year-old software engineer who reports a 6-month history of progressively low mood, anhedonia, and poor concentration following a romantic separation. He describes difficulties initiating sleep, waking up at 03:00 with rumination, and daytime lethargy. Endorses excessive anxiety related to job performance and social situations. Denies overt panic attacks. Endorses passive suicidal ideation ("I wouldn't mind if I didn't wake up"), but explicitly denies active intent, plan, or preparatory behaviors. No history of manic or hypomanic episodes (no decreased need for sleep, grandiosity, or hyper-verbal speech).
+
+PAST PSYCHIATRIC HISTORY:
+- Single episode of mild depression during college treated with brief counseling; no prior psychiatric hospitalizations or suicide attempts.
+
+MENTAL STATUS EXAMINATION:
+- Appearance: Casually dressed, unkempt hair, clean hygiene.
+- Behavior: Cooperative, eye contact intermittent. Psychomotor agitation absent; mild psychomotor slowing.
+- Speech: Soft, decreased volume, normal rate and coherence.
+- Mood: "Depressed and exhausted."
+- Affect: Constricted, mood-congruent.
+- Thought Process: Linear, goal-directed, logical.
+- Thought Content: No delusions, hallucinations, or paranoia. Passive suicidal ideation present without intent or plan.
+- Cognition: Grossly oriented to person, place, time, and situation. Mini-Mental State exam equivalent unimpaired.
+- Insight/Judgment: Intact insight; judgment deemed fair.
+
+DIAGNOSIS (DSM-5):
+1. Major Depressive Disorder, single episode, moderate severity (F32.1).
+2. Generalized Anxiety Disorder (F41.1).
+
+TREATMENT PLAN:
+1. Pharmacotherapy: Initiate Sertraline 25 mg PO daily for 7 days, then increase to 50 mg PO daily. Discussed potential side effects including transient nausea, headache, and boxed warning regarding suicidal ideation monitoring.
+2. Psychotherapy: Referral placed for outpatient Cognitive Behavioral Therapy (CBT).
+3. Safety Planning: Comprehensive crisis response safety plan completed. Patient provided 988 Suicide & Crisis Lifeline contact information.
+4. Follow-up: Clinic visit in 2 weeks for reassessment of tolerability and suicidal ideation.

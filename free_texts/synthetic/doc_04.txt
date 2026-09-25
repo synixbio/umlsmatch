@@ -1,0 +1,28 @@
+RECORD 04 | TYPE: INPATIENT PROGRESS NOTE (ICU)
+
+PATIENT: Synthetic-004 | AGE: 64 | SEX: M | HOSPITAL DAY: 4 | ICU DAY: 3
+SUBJECTIVE:
+Intubated and sedated on Propofol and Fentanyl. Overnight events: Weaned off Norepinephrine at 03:00; remaining hemodynamically stable without vasopressor support. 24-hour urine output was 1850 mL.
+
+OBJECTIVE:
+Vitals: BP 118/74 mmHg (MAP 88), HR 82 bpm, RR 18 (ventilator set rate 16), Temp 37.2 C, SpO2 98% on FiO2 35% and PEEP 5 cmH2O.
+Physical Exam:
+- Neuro: RASS -2, opens eyes to voice, follows simple commands intermittently. Pupils equal and reactive.
+- Pulmonary: Coarse breath sounds right base, decreased secretion clearance; endotracheal tube secured at 22 cm at the teeth.
+- CV: Regular rate, normal rhythm, no peripheral edema.
+- Abdomen: Soft, non-tender, hypoactive bowel sounds, enteral tube feeds running at 45 mL/hr.
+
+VENTILATOR SETTINGS:
+Mode: Pressure Support Ventilation (PSV). PEEP: 5 cmH2O. FiO2: 35%. Pressure Support: 8 cmH2O. Rapid Shallow Breathing Index (RSBI): 48.
+
+LABORATORY RESULTS:
+- ABG (06:00): pH 7.39, PaCO2 41 mmHg, PaO2 94 mmHg, HCO3 24 mEq/L, SaO2 97%.
+- WBC: 9.8 x 10^3/uL (down from 18.2).
+- Lactate: 1.1 mmol/L (normalized).
+
+ASSESSMENT AND PLAN:
+Septic shock secondary to urosepsis, improving rapidly; successful liberation from vasopressors.
+1. Respiratory: Passed spontaneous breathing trial (SBT). RSBI favorable. Plan for extubation this morning after airway cuff leak test and suctioning.
+2. Infectious Disease: E. coli isolated from blood and urine, pan-sensitive. De-escalate from Piperacillin-Tazobactam to IV Ceftriaxone 2g daily.
+3. Fluids/Renal: Discontinue maintenance crystalloids. Monitor spontaneous voiding post-extubation.
+4. Prophylaxis: Continue subcutaneous Enoxaparin 40 mg daily and Famotidine 20 mg IV daily.

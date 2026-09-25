@@ -1,0 +1,33 @@
+RECORD 05 | TYPE: CONSULTATION NOTE (CARDIOLOGY)
+
+PATIENT: Synthetic-005 | AGE: 69 | SEX: F | CONSULTANT: Dr. Marcus Vance, MD
+REQUESTING SERVICE: General Internal Medicine
+REASON FOR CONSULTATION: New-onset atrial fibrillation with rapid ventricular response (RVR).
+
+HISTORY OF PRESENT ILLNESS:
+The patient is a 69-year-old female admitted for acute diverticulitis who developed sudden palpitations, lightheadedness, and dyspnea last night. Bedside telemetry showed an irregularly irregular narrow complex tachycardia at 135-155 bpm. She received a total of 15 mg IV Diltiazem in divided doses with transient slowing to 110 bpm before returning to 140 bpm. Denies chest pain, syncope, or prior history of arrhythmias.
+
+PAST MEDICAL HISTORY:
+- Diverticular disease
+- Moderate persistent asthma (last exacerbation 2 years ago)
+- Obesity (BMI 34)
+
+PHYSICAL EXAMINATION:
+BP 112/68 mmHg, HR 138 bpm (irregularly irregular), RR 18 bpm, SpO2 95% on ambient air.
+Cardiovascular: Tachycardic, irregularly irregular rhythm, variability in S1 intensity. JVP flat. No peripheral edema.
+Lungs: Clear bilaterally, without active wheezing or crackles.
+
+DATA REVIEW:
+- 12-lead ECG: Atrial fibrillation with ventricular rate of 142 bpm. No ST-segment elevations or significant depressions. Normal QTc interval.
+- Transthoracic Echocardiogram (TTE today): LVEF 55-60%, left atrial enlargement (volume index 42 mL/m^2), mild mitral regurgitation, no gross wall motion abnormalities.
+- Serum K+: 4.1 mEq/L, Mg++: 2.2 mg/dL. TSH: 1.8 mIU/L (normal).
+
+IMPRESSION:
+New-onset paroxysmal atrial fibrillation with RVR precipitated by systemic inflammation from acute diverticulitis.
+- CHA2DS2-VASc Score = 3 (Age 65-74 = 1, Female = 1, Vascular disease = 0, Hypertension = 0, Diabetes = 0, Stroke = 0, CHF = 0... Adjusted with age + sex: Score 2-3).
+
+RECOMMENDATIONS:
+1. Rate Control: Initiate continuous IV Diltiazem drip titrated to target heart rate <110 bpm, transitioning to oral Diltiazem CD 180 mg daily once oral intake resumes. Avoid beta-blockers due to history of asthma.
+2. Anticoagulation: Given CHA2DS2-VASc score of 3, systemic anticoagulation is indicated. Start Apixaban 5 mg PO BID once acute GI bleed risk from diverticulitis is deemed low by primary team.
+3. Electrolytes: Maintain serum potassium >= 4.0 mEq/L and magnesium >= 2.0 mg/dL.
+4. Outpatient: Holter monitor follow-up in 4 weeks post-discharge.

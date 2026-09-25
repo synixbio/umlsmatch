@@ -1,0 +1,39 @@
+RECORD 01 | TYPE: EMERGENCY DEPARTMENT NOTE
+
+PATIENT: Synthetic-001 | AGE: 58 | SEX: M | DATE: 2026-03-12 14:22
+CHIEF COMPLAINT: Acute substernal chest pain radiating to the left jaw.
+
+HISTORY OF PRESENT ILLNESS:
+The patient is a 58-year-old male with a history of essential hypertension, hyperlipidemia, and a 30 pack-year tobacco history who presents via EMS with sudden-onset retrosternal pressure starting 75 minutes prior to arrival while mowing his lawn. He describes the pain as "like an elephant sitting on my chest," 8/10 intensity, radiating into his left shoulder and jaw. Associated with diaphoresis, mild nausea, and shortness of breath. Symptoms were partially relieved following 3 sublingual nitroglycerin tablets administered by EMS.
+
+PAST MEDICAL HISTORY:
+1. Hypertension x 12 years.
+2. Hyperlipidemia.
+3. Tobacco use disorder (active).
+
+MEDICATIONS:
+- Amlodipine 10 mg PO daily
+- Atorvastatin 20 mg PO daily
+- Aspirin 81 mg PO daily
+
+PHYSICAL EXAMINATION:
+Vitals: BP 158/92 mmHg, HR 98 bpm regular, RR 20 bpm, SpO2 96% on room air, Temp 36.8 C.
+General: Diaphoretic, mildly anxious, clutching chest, speaks in full sentences.
+Cardiovascular: Tachycardic, regular rhythm, S1/S2 present, no murmurs, rubs, or gallops. Normal peripheral pulses.
+Pulmonary: Clear to auscultation bilaterally, no rales, wheezes, or rhonchi.
+Abdomen: Soft, non-tender, non-distended.
+Extremities: No lower extremity edema, calves soft and non-tender.
+
+DIAGNOSTIC WORKUP:
+- ECG (14:30): Normal sinus rhythm at 96 bpm. 2.5 mm ST elevations in leads II, III, and aVF with reciprocal ST depressions in I and aVL.
+- Initial High-Sensitivity Troponin I: 342 ng/L (elevated).
+- Portable Chest X-ray: No cardiomegaly, mediastinum within normal limits, no active pulmonary infiltrates or pneumothorax.
+
+ASSESSMENT AND PLAN:
+Acute inferior wall ST-elevation myocardial infarction (STEMI).
+1. Emergent cardiac catheterization activation ("Code STEMI"). Interventional cardiology notified.
+2. Aspirin 325 mg chewed given.
+3. Ticagrelor 180 mg PO loading dose given.
+4. Unfractionated heparin bolus 4000 units IV followed by infusion at 12 units/kg/hr.
+5. Intravenous access x2 secured; continuous telemetry monitoring.
+6. Transfer to Cardiac Catheterization Laboratory immediately.

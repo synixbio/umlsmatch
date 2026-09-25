@@ -1,0 +1,4 @@
+# Normalize to LF in the repository, check out native. Without this, a Windows
+# clone commits CRLF and every later diff on a Linux/CI checkout shows whole
+# files as changed.
+* text=auto eol=lf

@@ -1,0 +1,91 @@
+#!/bin/sh
+# Pre-commit gate: PHI containment, then lint, then tests.
+#
+# Enable once per clone (hooks are not themselves version-controlled):
+#
+#     git config core.hooksPath .githooks
+#
+# Ordered cheapest-and-most-serious first. The PHI check runs before anything
+# else because it is the only failure here that cannot be undone by a later
+# commit -- once note text is in history, removing it means rewriting history.
+#
+# `git commit --no-verify` bypasses all of this. That is fine for a work in
+# progress; it is not fine for the PHI check, so that one is also worth keeping
+# in any CI that gates a push.
+
+set -e
+
+fail() { printf '\npre-commit: %s\n' "$1" >&2; exit 1; }
+
+# --- 1. PHI containment ------------------------------------------------------
+# .gitignore already excludes these, but `git add -f` overrides it and a new
+# output directory would not be covered at all. This fails closed on the
+# patterns that carry note text or patient/note identifiers. See .gitignore.
+staged=$(git diff --cached --name-only --diff-filter=ACMR)
+
+# The pattern lives in .githooks/phi-paths.pattern, which is also what CI
+# reads. It used to be written out here and again in the workflow, and the two
+# drifted far enough that the raw notes passed CI. Read it, do not inline it --
+# tests/test_phi_guard.py fails if this stops sourcing the shared file.
+# `|| true` so a missing file reaches the explicit check below rather than
+# tripping `set -e` with no explanation -- "the guard is gone" is exactly the
+# failure that must not be cryptic.
+phi_pattern=$(grep -Ev '^[[:space:]]*(#|$)' "$(dirname "$0")/phi-paths.pattern" 2>/dev/null \
+              | head -1 || true)
+[ -n "$phi_pattern" ] || fail "phi-paths.pattern missing or empty; refusing to run unguarded"
+
+phi=$(printf '%s\n' "$staged" | grep -Ei "$phi_pattern" || true)
+
+# The carve-out, from .githooks/phi-allow.pattern: paths that match the rule
+# above but are known-safe, currently the synthetic corpus. Applied as a second
+# pass rather than folded into the pattern because POSIX ERE has no negative
+# lookahead, and `grep -P` is not portable enough to be the thing a PHI gate
+# depends on.
+#
+# The guard on `$phi_allow` being non-empty is the whole safety of this step:
+# `grep -Eiv ""` matches every line and inverts to nothing, so a missing or
+# empty allow file would turn the refusal above into a no-op. Absent file means
+# no exceptions, not no gate.
+phi_allow=$(grep -Ev '^[[:space:]]*(#|$)' "$(dirname "$0")/phi-allow.pattern" 2>/dev/null \
+            | head -1 || true)
+if [ -n "$phi" ] && [ -n "$phi_allow" ]; then
+    phi=$(printf '%s\n' "$phi" | grep -Eiv "$phi_allow" || true)
+fi
+
+if [ -n "$phi" ]; then
+    printf '\npre-commit: refusing to commit PHI-bearing paths:\n\n' >&2
+    printf '%s\n' "$phi" | sed 's/^/    /' >&2
+    printf '\nThe note corpus and everything derived from it stay out of git.\n' >&2
+    printf 'If this is genuinely safe, unstage it, or add a narrow exception\n' >&2
+    printf 'to .githooks/phi-allow.pattern -- do not use --no-verify to push\n' >&2
+    printf 'past it. CI reads the same two files and will fail on the push\n' >&2
+    printf 'regardless.\n' >&2
+    exit 1
+fi
+
+# --- locate the interpreter --------------------------------------------------
+if   [ -x .venv/Scripts/python.exe ]; then PY=.venv/Scripts/python.exe
+elif [ -x .venv/bin/python ];         then PY=.venv/bin/python
+elif command -v python3 >/dev/null 2>&1; then PY=python3
+elif command -v python  >/dev/null 2>&1; then PY=python
+else fail "no Python interpreter found; skip with --no-verify if intended"
+fi
+
+# --- 2. lint -----------------------------------------------------------------
+# The rule set is pinned in pyproject.toml precisely so this is reproducible.
+if "$PY" -m ruff --version >/dev/null 2>&1; then
+    "$PY" -m ruff check . --exclude .venv \
+        || fail "ruff found issues (\`$PY -m ruff check . --fix\` fixes most)"
+    "$PY" -m ruff format --check . --exclude .venv >/dev/null 2>&1 || true
+else
+    printf 'pre-commit: ruff not installed, skipping lint ' >&2
+    printf '(pip install -e ".[dev]")\n' >&2
+fi
+
+# --- 3. tests ----------------------------------------------------------------
+# The full suite runs in a few seconds. Dictionary- and model-dependent tests
+# skip themselves when those artifacts are absent, so this stays usable on a
+# fresh clone.
+"$PY" -m pytest -q || fail "tests failed"
+
+exit 0

@@ -1,0 +1,30 @@
+RECORD 16 | TYPE: INFECTIOUS DISEASE CONSULTATION
+
+PATIENT: Synthetic-016 | AGE: 56 | SEX: M | DATE: 2026-12-14
+CONSULTANT: Dr. Rachel Kim, MD
+REASON FOR CONSULTATION: Persistent Staphylococcus aureus bacteremia.
+
+HISTORY OF PRESENT ILLNESS:
+The patient is a 56-year-old male with poorly controlled type 2 diabetes mellitus who presented 4 days ago with high fevers, chills, and an infected neurotrophic ulcer on the plantar surface of his left great toe. Blood cultures obtained at admission in two separate sets grew Gram-positive cocci in clusters, confirmed as Methicillin-Resistant Staphylococcus aureus (MRSA) with Vancomycin MIC of 1.0 mcg/mL. Repeat blood cultures at 48 and 72 hours remain persistently positive for MRSA.
+
+PHYSICAL EXAMINATION:
+Vitals: Temp 38.6 C, BP 124/76 mmHg, HR 92 bpm, RR 18 bpm.
+General: Ill-appearing male, febrile, rigors during exam.
+Cardiovascular: Tachycardic, regular. New grade II/VI holosystolic murmur audible at the cardiac apex. Peripheral examination reveals splinter hemorrhages under left fingernails. No Janeway lesions or Osler nodes.
+Left Lower Extremity: 2.5 x 2.0 cm ulcer on plantar aspect of first metatarsal head; probe-to-bone test positive. Surrounding erythema, warmth, and purulent exudate.
+
+DIAGNOSTIC WORKUP:
+- Repeat Blood Cultures: MRSA positive (persistent at day 4).
+- Transesophageal Echocardiogram (TEE today): 1.1 cm mobile echogenic mass on the posterior leaflet of the mitral valve with moderate mitral regurgitation, consistent with infective endocarditis.
+- Left Foot X-ray: Cortical destruction and periosteal reaction in the first metatarsal head consistent with osteomyelitis.
+
+ASSESSMENT:
+1. Persistent MRSA bacteremia secondary to diabetic foot osteomyelitis with secondary native mitral valve infective endocarditis.
+2. Treatment failure/slow clearance on standard-dose Vancomycin.
+
+RECOMMENDATIONS:
+1. Transition antimicrobial regimen: Switch from Vancomycin to high-dose Daptomycin (10 mg/kg IV once every 24 hours) combined with Ceftaroline 600 mg IV every 8 hours for synergistic bactericidal activity against refractory MRSA endocarditis.
+2. Urgent Cardiothoracic Surgery consult for surgical evaluation of mitral valve vegetation (>10 mm with leaflet damage).
+3. Urgent Orthopedic Surgery consult for surgical debridement / ray amputation of left first metatarsal head (source control).
+4. Repeat blood cultures every 24-48 hours until documented clearance.
+5. Anticipate a minimum of 6 weeks of IV antibiotic therapy from the first negative blood culture.

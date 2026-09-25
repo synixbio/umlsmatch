@@ -1,0 +1,27 @@
+RECORD 03 | TYPE: OUTPATIENT CLINICAL ENCOUNTER (PRIMARY CARE)
+
+PATIENT: Synthetic-003 | AGE: 46 | SEX: F | DATE: 2026-04-05
+REASON FOR VISIT: Routine diabetes and hypertension follow-up.
+
+SUBJECTIVE:
+Patient reports doing reasonably well over the last 3 months. Denies hypoglycemia episodes (no tremors, diaphoresis, or palpitations). Self-monitored fasting blood glucose levels range between 110 and 140 mg/dL. Compliant with prescribed medications. Reports moderate compliance with low-sodium diet; exercises 30 minutes 3 days a week. Denies chest pain, dyspnea on exertion, visual changes, or lower extremity numbness/tingling.
+
+OBJECTIVE:
+Vitals: BP 128/78 mmHg, HR 72 bpm regular, Wt 78.4 kg (BMI 28.1 kg/m^2).
+Physical Exam:
+- Eyes: Anicteric sclerae, no conjunctival pallor.
+- CV: RRR, no murmurs.
+- Pulm: Clear to auscultation bilaterally.
+- Extremities: Warm, peripheral pulses 2+ symmetric. Monofilament sensory testing normal over bilateral plantar surfaces (10/10 sites intact). Bilateral foot skin intact without calluses or ulceration.
+
+LABORATORY DATA (collected 2026-04-02):
+- HbA1c: 7.1% (previous 7.8% 6 months ago).
+- Serum Creatinine: 0.8 mg/dL, eGFR >90 mL/min/1.73m^2.
+- Urine Albumin-to-Creatinine Ratio: 18 mg/g (normal).
+- Lipid Panel: Total Cholesterol 168 mg/dL, Triglycerides 142 mg/dL, HDL 48 mg/dL, LDL 92 mg/dL.
+
+ASSESSMENT & PLAN:
+1. Type 2 Diabetes Mellitus without complications: Demonstrating improved glycemic control (HbA1c 7.1%). Continue Metformin 1000 mg PO BID. Emphasize ongoing dietary discipline.
+2. Essential Hypertension: Well-controlled at target (<130/80 mmHg). Continue Losartan 50 mg PO daily.
+3. Hyperlipidemia: Well-managed on Atorvastatin 20 mg PO daily; continue current dose.
+4. Preventative Health: Administered annual influenza vaccine today. Due for screening mammogram; requisition issued. Follow up in 6 months with repeat HbA1c and basic metabolic panel.

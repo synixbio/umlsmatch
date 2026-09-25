@@ -1,0 +1,18 @@
+RECORD 06 | TYPE: SURGICAL OPERATIVE REPORT
+
+PATIENT: Synthetic-006 | AGE: 31 | SEX: M | DATE: 2026-05-14
+PREOPERATIVE DIAGNOSIS: Acute appendicitis.
+POSTOPERATIVE DIAGNOSIS: Acute suppurative appendicitis with localized peritonitis.
+PROCEDURE: Laparoscopic appendectomy.
+SURGEON: Dr. Elena Rostova, MD | ANESTHESIA: General endotracheal.
+ESTIMATED BLOOD LOSS: < 15 mL | COMPLICATIONS: None.
+
+FINDINGS:
+The appendix was retrocecal, markedly inflamed, hyperemic, and turgid, with patchy fibrinopurulent exudate along the distal tip. No perforation or fecolith was noted. Cecum and terminal ileum appeared normal.
+
+PROCEDURE NARRATIVE:
+The patient was brought to the operating room, placed supine, and general endotracheal anesthesia was administered. The abdomen was prepped and draped in standard sterile fashion. A 12-mm infraumbilical incision was made, and pneumoperitoneum was established using a Veress needle up to 15 mmHg. A 12-mm camera port was inserted. Two additional 5-mm trocars were placed under direct vision in the left lower quadrant and suprapubic region.
+
+The patient was placed in Trendelenburg position with left tilt. The inflamed appendix was identified in the retrocecal space. The mesoappendix was mobilized and divided using an ultrasonic scalpel, skeletonizing the appendiceal base. A loop ligature (Endoloop) was positioned twice at the healthy base of the cecum, and the appendix was transected sharply between the ligatures.
+
+The specimen was placed in an Endo Catch retrieval bag and extracted intact through the umbilical port. The operative field was irrigated with sterile saline and aspirated completely. Hemostasis was verified. Trocars were removed under visualization, desufflation was achieved, and port sites were closed using 4-0 Monocryl for subcuticular tissue and Dermabond skin adhesive. Sponge, sharp, and instrument counts were correct at closure. The patient was extubated and transferred to PACU in stable condition.

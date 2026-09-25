@@ -1,0 +1,31 @@
+RECORD 07 | TYPE: CONSULTATION NOTE (NEUROLOGY)
+
+PATIENT: Synthetic-007 | AGE: 78 | SEX: M | DATE: 2026-06-01
+REQUESTING PHYSICIAN: Emergency Medicine
+REASON FOR CONSULTATION: Acute onset right-sided weakness and aphasia.
+
+HISTORY:
+The patient is a 78-year-old male with atrial fibrillation (non-compliant with Warfarin) and hyperlipidemia who experienced sudden inability to speak and right arm weakness at 18:30 while eating dinner with his spouse. Brought to ED by ambulance; arrival time 19:15 (last known well time 18:00, 75 minutes prior).
+
+NEUROLOGICAL EXAMINATION (NIHSS: 14):
+- Level of Consciousness: Alert (0), answers month/age incorrectly (2), follows blink/squeeze commands (0).
+- Best Gaze: Normal conjugate eye movements (0).
+- Visual Fields: Right homonymous hemianopia (2).
+- Facial Palsy: Right lower facial droop with forehead sparing (2).
+- Motor Arm: Right arm drift to bed before 10 seconds (3); left arm no drift (0).
+- Motor Leg: Right leg falls before 5 seconds (2); left leg normal (0).
+- Limb Ataxia: Normal on left; non-testable on right due to weakness (0).
+- Sensory: Mild decrease to pinprick right hemibody (1).
+- Best Language: Global/expressive aphasia with severe naming impairment (2).
+- Dysarthria: Severe slurring (2).
+- Extinction/Inattention: Neglects right tactile stimuli (1).
+
+DIAGNOSTICS:
+- Non-Contrast CT Brain (19:28): ASPECTS score 9. Early subtle hypoattenuation in the left insular ribbon; no acute intracranial hemorrhage.
+- CT Angiography Head/Neck: Cutoff of the left middle cerebral artery (MCA) M1 segment. Good collateral vessels.
+
+RECOMMENDATIONS & INTERVENTION:
+1. Patient qualifies for systemic thrombolysis within the 4.5-hour window. Administered IV Tenecteplase (0.25 mg/kg) at 19:40.
+2. Acute large vessel occlusion (LVO) of left M1 segment identified. Candidate for emergent endovascular mechanical thrombectomy.
+3. Neurointerventional team activated; transferring patient directly to the neuro-interventional biplane suite.
+4. Strict blood pressure parameters: Maintain SBP < 180 mmHg and DBP < 105 mmHg. Hold antiplatelets and anticoagulants for 24 hours post-thrombolytic therapy pending repeat head CT.
