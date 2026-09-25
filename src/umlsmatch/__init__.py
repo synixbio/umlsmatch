@@ -20,7 +20,7 @@ from __future__ import annotations
 
 #: Single source of truth for the version: pyproject declares it dynamic and
 #: hatchling reads it from here, so a release bumps one literal.
-__version__ = "0.1.0"
+__version__ = "0.2.0"
 
 __all__ = ["Annotation", "ClinicalPipeline", "__version__", "find_dictionary"]
 

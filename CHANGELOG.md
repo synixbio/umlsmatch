@@ -6,6 +6,8 @@ versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [0.2.0] — 2026-09-25
+
 ### Added
 
 - **`ClinicalPipeline.assess(text, spans)`** runs this pipeline's sentence

@@ -212,6 +212,27 @@ with ClinicalPipeline() as nlp:
         ...
 ```
 
+Spans found by another extractor — assess them with these rules:
+
+```python
+with ClinicalPipeline() as nlp:
+    text = "Patient denies chest pain."
+    anns = nlp.assess(text, [(15, 25, "C0008031")])   # (start, end, cui)
+    # [Annotation(cui='C0008031', negated=True, ...)]
+```
+
+`assess()` runs the same sentence splitting, parse, section tracking and
+assertion rules as `analyze()` (they share one code path, and a test pins that
+a span both see gets identical attributes), but over your spans instead of this
+pipeline's own matches. It returns one entry per span, in input order: an
+`Annotation` with your offsets, or `None` for a span it cannot assess — one
+that crosses a sentence boundary or covers no token. `groups`,
+`drop_header_mentions` and `resolve_overlaps` do not apply: they decide what
+`analyze()` finds, and here you already decided. `term` is empty, and `group`
+and `preferred_text` are empty for a CUI not in this dictionary. This is how
+[cuiflow](https://github.com/synixbio/cuiflow)'s `ensemble:hybrid_staged` pairs
+MetaMapLite's concepts with these rules.
+
 ### Command line
 
 ```bash
