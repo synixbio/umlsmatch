@@ -33,7 +33,7 @@ out/
 # Adjudication review files quote whole sentences of note text.
 *.csv
 *.tsv
-# Same table as the CSV export, written by examples/parse_to_parquet.py.
+# Same table as a CSV export, verbatim text column included.
 *.parquet
 # The raw notes are .txt and the adjudication design is .json. Neither suffix
 # was covered while the corpus sat under the blanket `data/` rule; both are
@@ -80,6 +80,16 @@ build/
 # --- Local editor and agent state --------------------------------------------
 .obsidian/
 .claude/
+
+# --- Local export scripts ------------------------------------------------------
+# Corpus-to-file exporters kept for local use only; not part of the published
+# examples. `python -m umlsmatch --json` is the supported export route.
+examples/parse_to_csv.py
+examples/parse_to_jsonl.py
+examples/parse_to_jsonl_batch.py
+examples/parse_to_parquet.py
+examples/parse_to_sqlite.py
+examples/compare_exports.py
 
 # --- Local, unpublished notes ------------------------------------------------
 # A graded internal assessment. Kept out of the repository deliberately: it is

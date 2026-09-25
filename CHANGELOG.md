@@ -6,6 +6,15 @@ versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### Removed
+
+- **The corpus export examples are no longer in the repository.**
+  `parse_to_csv.py`, `parse_to_jsonl.py`, `parse_to_jsonl_batch.py`,
+  `parse_to_parquet.py`, `parse_to_sqlite.py` and `compare_exports.py` are now
+  local-only and gitignored. None was part of the installed package. Export with
+  `python -m umlsmatch --json -o FILE` and load that with
+  `examples/load_to_sqlite.py --basename`; `examples/README.md` walks through it.
+
 ## [0.2.0] — 2026-09-25
 
 ### Added

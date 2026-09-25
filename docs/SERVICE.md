@@ -132,8 +132,8 @@ consequences:
   pipeline (see Memory) to buy threads that mostly contend, and past ~4 the
   measured throughput gain is inside the noise.
 - **Scale with processes, not pool size** — container replicas (or
-  `uvicorn --workers`) each get their own interpreter and their own GIL. This is
-  the same conclusion [examples/parse_to_jsonl_batch.py](../examples/parse_to_jsonl_batch.py) reaches for batch work.
+  `uvicorn --workers`) each get their own interpreter and their own GIL. The
+  same holds for batch work: one pipeline per worker process.
 - Throughput is ~55,000–96,000 characters/sec, which is the more stable figure;
   per-document rates depend entirely on note length.
 

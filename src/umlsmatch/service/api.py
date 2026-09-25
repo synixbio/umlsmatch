@@ -753,8 +753,7 @@ def create_app(pool: PipelinePool | None = None) -> FastAPI:
         a pipeline indefinitely.
 
         A document that fails is reported in its own `error` field and the rest
-        still run -- one malformed note should not void a batch, the same
-        reasoning as ``examples/parse_to_jsonl.py``.
+        still run -- one malformed note should not void a batch.
         """
         if req.negated_only and req.affirmed_only:
             raise HTTPException(

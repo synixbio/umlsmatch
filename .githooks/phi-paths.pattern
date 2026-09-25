@@ -28,8 +28,8 @@
 #       directory should fail closed rather than be discovered. `csv` is here
 #       because adjudication review files quote whole sentences of note text
 #       and a reviewer working in Excel saves them wherever is convenient;
-#       `txt` because the raw notes are .txt; `parquet` because
-#       examples/parse_to_parquet.py writes the same table the CSV export does,
+#       `txt` because the raw notes are .txt; `parquet` because a Parquet
+#       export holds the same table the CSV export does,
 #       verbatim `text` column included, and a binary file gives a reviewer
 #       even less chance of noticing note text in it by eye.
 #

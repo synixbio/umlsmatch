@@ -259,8 +259,8 @@ class ClinicalPipeline:
 
     **Not thread-safe** -- it inherits
     :class:`~umlsmatch.dictionary.matcher.RareWordMatcher`'s unsynchronized
-    caches. Scale with processes, one pipeline per worker; see
-    ``examples/parse_to_jsonl_batch.py``.
+    caches. Scale with processes, one pipeline per worker, each built once
+    in the worker's initializer rather than per document.
 
     Args:
         db_path: dictionary to use; see :func:`find_dictionary` for resolution.

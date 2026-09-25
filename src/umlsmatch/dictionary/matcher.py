@@ -192,7 +192,7 @@ class RareWordMatcher:
     ``check_same_thread=False`` so it can be handed to another thread, but the
     candidate and concept memo dicts are unsynchronized and concurrent
     ``match()`` calls will interleave on them. Give each thread its own
-    instance, or scale with processes -- see ``examples/parse_to_jsonl_batch.py``.
+    instance, or scale with processes, one matcher per worker.
 
     Args:
         db_path: dictionary built by ``tools/build_dictionary.py``, then
