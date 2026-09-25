@@ -5,16 +5,14 @@
     python examples/load_to_sqlite.py out/annotations.jsonl out/annotations.db --append
 
 Completes the workflow: analyze -> export -> load -> query (``sqlite_browser.py``).
-``parse_to_sqlite.py`` does all four in one pass, and imports this module's
-schema to do it; use that when the export is not itself wanted, and this when it
-is -- or when the same export must be loaded more than once.
+The export is ``python -m umlsmatch --json -o FILE``; this loads it, as many
+times as needed, without re-running the pipeline.
 
 Format is detected from the extension, and JSONL records are further detected by
 shape:
 
-  * ``.csv``   -- from ``parse_to_csv.py``
-  * ``.jsonl`` with an ``annotations`` key -- from ``parse_to_jsonl.py`` or
-    ``parse_to_jsonl_batch.py`` (also ``python -m umlsmatch --json``)
+  * ``.csv``   -- one row per annotation, keyed by a ``document`` column
+  * ``.jsonl`` with an ``annotations`` key -- from ``python -m umlsmatch --json``
   * ``.jsonl`` with a ``mentions`` key -- a **Java cTAKES silver standard** from
     ``tools/run_java_ctakes.py``. Loading this lets you query cTAKES' own output
     with the same SQL, or diff it against the Python pipeline's.
@@ -85,9 +83,9 @@ CREATE TABLE IF NOT EXISTS documents (
 
 #: The ``annotations`` table, column by column: name -> (declaration, comment).
 #:
-#: A table rather than one CREATE TABLE literal because two scripts build this
-#: table and they do not always want every column. ``parse_to_sqlite.py`` omits
-#: the assertion attributes its pipeline never assesses -- a column that is NULL
+#: A table rather than one CREATE TABLE literal because callers that import
+#: :func:`schema` do not always want every column. A narrow table omits the
+#: assertion attributes its pipeline never assesses -- a column that is NULL
 #: in every row says something about the pipeline, not about any mention -- while
 #: this script keeps them all, because a **Java cTAKES silver standard assesses
 #: all six** and a table without the columns could not hold one. Generating both
@@ -197,8 +195,8 @@ class Loader:
     """Batched inserts into whatever shape the `annotations` table actually has.
 
     The column list is read from the table rather than assumed, because the
-    table is not always the full one: ``parse_to_sqlite.py`` omits the
-    attributes its pipeline never assesses. Building the INSERT from the
+    table is not always the full one: a narrow table omits the attributes
+    its pipeline never assesses. Building the INSERT from the
     database means one loader fills either shape, and in particular that
     ``--append`` still works across the two.
 
@@ -281,7 +279,7 @@ def load_csv(path: Path, loader: Loader) -> None:
             sys.exit(f"error: {path} has no header row")
         if "document" not in reader.fieldnames:
             sys.exit(
-                f"error: {path} lacks a 'document' column -- is it from parse_to_csv.py?"
+                f"error: {path} lacks a 'document' column -- is it an annotation export?"
             )
         for row in reader:
             loader.add(row["document"], row)
@@ -388,8 +386,8 @@ def main() -> int:
     conn.executescript("PRAGMA journal_mode = OFF; PRAGMA synchronous = OFF;")
     # The full table: this loader's other input is a cTAKES silver standard,
     # which assesses all six attributes. `CREATE TABLE IF NOT EXISTS` makes
-    # this a no-op when --append targets a narrower table written by
-    # parse_to_sqlite.py, and the Loader then fills whatever is there.
+    # this a no-op when --append targets a narrower table built elsewhere
+    # from schema(), and the Loader then fills whatever is there.
     conn.executescript(schema())
 
     loader = Loader(conn, basename=args.basename)

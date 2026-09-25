@@ -116,10 +116,10 @@ def _resolve(given: Path | None, root: Path) -> Path:
     if found is None:
         sys.exit(
             f"error: no database found under {root}/\n"
-            "Build one from a run's annotations, writing it beside them:\n"
-            "  python examples/parse_to_jsonl.py free_texts/synthetic\n"
-            "  python examples/load_to_sqlite.py \\\n"
-            f"      {root}/<run-id>/annotations.jsonl \\\n"
+            "Export a corpus, then load it into a run directory:\n"
+            "  python -m umlsmatch free_texts/synthetic --json -o out/annotations.jsonl\n"
+            "  python examples/load_to_sqlite.py --basename \\\n"
+            "      out/annotations.jsonl \\\n"
             f"      {root}/<run-id>/annotations.db\n"
             "...or pass a path directly:\n"
             "  python examples/sqlite_reader.py path/to.db"
